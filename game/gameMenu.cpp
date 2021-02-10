@@ -4,6 +4,9 @@
 #include <string>
 #include <windows.h>
 
+#define KEY_UP 72
+#define KEY_DOWN 80
+
 using namespace std;
 
 const string mainMenuItems[4] = {
@@ -55,18 +58,23 @@ void printMenu(int activeOption)
 
 	char latestKeyPress = _getch();
 
-	if (latestKeyPress == 's' || latestKeyPress == 'S')
+	if (latestKeyPress == 's' || latestKeyPress == 'S' || latestKeyPress == KEY_DOWN)
 	{
 		activeOption = (activeOption < 3) ? activeOption + 1 : 0;
 		
 		updateMainMenuColors(activeOption);
+
+		printMenu(activeOption);
 	}
-	else if (latestKeyPress == 'w' || latestKeyPress == 'W')
+	else if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == KEY_UP)
 	{
 		activeOption = (activeOption > 0) ? activeOption - 1 : 3;
 
 		updateMainMenuColors(activeOption);
+
+		printMenu(activeOption);
 	}
+
 
 	printMenu(activeOption);
 }
