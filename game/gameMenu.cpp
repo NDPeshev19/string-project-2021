@@ -13,7 +13,7 @@ const string mainMenuItems[4] = {
 	"Exit"
 };
 
-int mainMenuColors[4] = { 15, 15, 15, 15 };
+int mainMenuColors[4] = { 8, 15, 15, 15 };
 
 void setTextColor(int color)
 {
