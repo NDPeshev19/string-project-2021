@@ -1,2 +1,2 @@
-<img src="Design/AthenaLogoTrans.png" width="450">
+![Athena Logo](Design/AthenaLogoTrans.png)
 # string-project-2021
