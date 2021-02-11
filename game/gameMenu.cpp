@@ -8,6 +8,8 @@
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_ENTER 13
+#define COLOR_MAIN 15
+#define COLOR_HIGHLIGHT 8
 
 using namespace std;
 
@@ -18,12 +20,12 @@ const string mainMenuItems[4] = {
 	"Exit"
 };
 
-int mainMenuColors[4] = { 8, 15, 15, 15 };
+int mainMenuColors[4] = { COLOR_HIGHLIGHT, COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
 
 struct level_select_colors {
-	int world1[3] = { 15, 15, 15 };
-	int world2[3] = { 15, 15, 15 };
-	int world3[3] = { 15, 15, 15 };
+	int world1[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
+	int world2[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
+	int world3[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
 } levelSelectColors;
 
 /*CHARACTERS OR CELLS*/
@@ -51,7 +53,7 @@ void initFrontEnd()
 {
 	initBoardCharacters();
 
-	printMenu(0);
+	
 }
 
 void setTextColor(int color)
@@ -77,9 +79,9 @@ void setAllMainMenuColors(int val)
 
 void updateMainMenuColors(int num)
 {
-	setAllMainMenuColors(15);
+	setAllMainMenuColors(COLOR_MAIN);
 
-	mainMenuColors[num] = 8;
+	mainMenuColors[num] = COLOR_HIGHLIGHT;
 }
 
 void setAllWorldColors(int world[], int color)
@@ -99,11 +101,11 @@ void printWorldOne(int currentlySelected)
 {
 	system("cls");
 
-	setAllWorldColors(levelSelectColors.world1, 15);
+	setAllWorldColors(levelSelectColors.world1, COLOR_MAIN);
 
-	setSpecificWorldColor(levelSelectColors.world1, currentlySelected, 8);
+	setSpecificWorldColor(levelSelectColors.world1, currentlySelected, COLOR_HIGHLIGHT);
 
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 
 	cout << "World 1" << endl;
 	cout << endl;
@@ -113,17 +115,17 @@ void printWorldOne(int currentlySelected)
 	cout << "   " << boardCharacters["verticalLine"];
 	setTextColor(levelSelectColors.world1[0]);
 	cout << " 1 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
 	cout << boardCharacters["rightToLeft"];
 	setTextColor(levelSelectColors.world1[1]);
 	cout << " 2 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
 	cout << boardCharacters["rightToLeft"];
 	setTextColor(levelSelectColors.world1[2]);
 	cout << " 3 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["verticalLine"] <<" > "<< endl;
 
 	cout << "   " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"]<< boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << endl;
@@ -158,11 +160,11 @@ void printWorldTwo(int currentlySelected)
 {
 	system("cls");
 
-	setAllWorldColors(levelSelectColors.world2, 15);
+	setAllWorldColors(levelSelectColors.world2, COLOR_MAIN);
 
-	setSpecificWorldColor(levelSelectColors.world2, currentlySelected, 8);
+	setSpecificWorldColor(levelSelectColors.world2, currentlySelected, COLOR_HIGHLIGHT);
 
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 
 	cout << "World 2" << endl;
 	cout << endl;
@@ -172,17 +174,17 @@ void printWorldTwo(int currentlySelected)
 	cout << " < " << boardCharacters["verticalLine"];
 	setTextColor(levelSelectColors.world2[0]);
 	cout << " 1 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
 	cout << boardCharacters["rightToLeft"];
 	setTextColor(levelSelectColors.world2[1]);
 	cout << " 2 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
 	cout << boardCharacters["rightToLeft"];
 	setTextColor(levelSelectColors.world2[2]);
 	cout << " 3 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["verticalLine"] <<" > "<< endl;
 
 	cout << "   " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << endl;
@@ -222,11 +224,11 @@ void printWorldThree(int currentlySelected)
 {
 	system("cls");
 
-	setAllWorldColors(levelSelectColors.world3, 15);
+	setAllWorldColors(levelSelectColors.world3, COLOR_MAIN);
 
-	setSpecificWorldColor(levelSelectColors.world3, currentlySelected, 8);
+	setSpecificWorldColor(levelSelectColors.world3, currentlySelected, COLOR_HIGHLIGHT);
 
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 
 	cout << "World 3" << endl;
 	cout << endl;
@@ -236,17 +238,17 @@ void printWorldThree(int currentlySelected)
 	cout << " < " << boardCharacters["verticalLine"];
 	setTextColor(levelSelectColors.world3[0]);
 	cout << " 1 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
 	cout << boardCharacters["rightToLeft"];
 	setTextColor(levelSelectColors.world3[1]);
 	cout << " 2 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
 	cout << boardCharacters["rightToLeft"];
 	setTextColor(levelSelectColors.world3[2]);
 	cout << " 3 ";
-	setTextColor(15);
+	setTextColor(COLOR_MAIN);
 	cout << boardCharacters["verticalLine"] << endl;
 
 	cout << "   " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << endl;
