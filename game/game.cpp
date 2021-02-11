@@ -7,4 +7,5 @@ int main()
 {
 	initFrontEnd();
 
+	printMenu(0);
 }
