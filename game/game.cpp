@@ -5,5 +5,7 @@ using namespace std;
 
 int main()
 {
+	initFrontEnd();
+
 	printMenu(0);
 }

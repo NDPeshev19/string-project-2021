@@ -3,9 +3,11 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <map>
 
 #define KEY_UP 72
 #define KEY_DOWN 80
+#define KEY_ENTER 13
 
 using namespace std;
 
@@ -17,6 +19,36 @@ const string mainMenuItems[4] = {
 };
 
 int mainMenuColors[4] = { 8, 15, 15, 15 };
+
+struct level_select_colors {
+	int world1[3] = { 15, 15, 15 };
+	int world2[3] = { 15, 15, 15 };
+	int world3[3] = { 15, 15, 15 };
+} levelSelectColors;
+
+map<string, char> boardCharacters;
+
+void initBoardCharacters()
+{
+	boardCharacters.insert(pair<string, char>("topLeftCorner", 218));
+	boardCharacters.insert(pair<string, char>("topRightCorner", 191));
+	boardCharacters.insert(pair<string, char>("bottomLeftCorner", 192));
+	boardCharacters.insert(pair<string, char>("bottomRightCorner", 217));
+	boardCharacters.insert(pair<string, char>("topToBottom", 194));
+	boardCharacters.insert(pair<string, char>("bottomToTop", 193));
+	boardCharacters.insert(pair<string, char>("leftToRight", 195));
+	boardCharacters.insert(pair<string, char>("rightToLeft", 180));
+	boardCharacters.insert(pair<string, char>("cross", 197));
+	boardCharacters.insert(pair<string, char>("horizontalLine", 196));
+	boardCharacters.insert(pair<string, char>("verticalLine", 179));
+}
+
+void initFrontEnd()
+{
+	initBoardCharacters();
+
+
+}
 
 void setTextColor(int color)
 {
@@ -46,6 +78,239 @@ void updateMainMenuColors(int num)
 	mainMenuColors[num] = 8;
 }
 
+void setAllWorldColors(int world[], int color)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		world[i] = color;
+	}
+}
+
+void setSpecificWorldColor(int world[], int level, int color)
+{
+	world[level] = color;
+}
+
+void printWorldOne(int currentlySelected)
+{
+	system("cls");
+
+	setAllWorldColors(levelSelectColors.world1, 15);
+
+	setSpecificWorldColor(levelSelectColors.world1, currentlySelected, 8);
+
+	setTextColor(15);
+
+	cout << "World 1" << endl;
+	cout << endl;
+
+	cout << "   " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << "  " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << "  " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << endl;
+	
+	cout << "   " << boardCharacters["verticalLine"];
+	setTextColor(levelSelectColors.world1[0]);
+	cout << "1";
+	setTextColor(15);
+	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
+	cout << boardCharacters["rightToLeft"];
+	setTextColor(levelSelectColors.world1[1]);
+	cout << "2";
+	setTextColor(15);
+	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
+	cout << boardCharacters["rightToLeft"];
+	setTextColor(levelSelectColors.world1[2]);
+	cout << "3";
+	setTextColor(15);
+	cout << boardCharacters["verticalLine"] << endl;
+
+	cout << "   " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << endl;
+	
+	char typedChar = _getch();
+
+	if (typedChar == 'a' || typedChar == 'A')
+	{
+		currentlySelected = (currentlySelected > 0) ? currentlySelected - 1 : currentlySelected;
+
+		printWorldOne(currentlySelected);
+	}
+
+	if (typedChar == 'd' || typedChar == 'D')
+	{
+		if (currentlySelected < 2)
+		{
+			currentlySelected++;
+
+			printWorldOne(currentlySelected);
+		}
+		else
+		{
+			currentlySelected = 0;
+
+			printWorldTwo(currentlySelected);
+		}
+	}
+}
+
+void printWorldTwo(int currentlySelected)
+{
+	system("cls");
+
+	setAllWorldColors(levelSelectColors.world2, 15);
+
+	setSpecificWorldColor(levelSelectColors.world2, currentlySelected, 8);
+
+	setTextColor(15);
+
+	cout << "World 2" << endl;
+	cout << endl;
+
+	cout << "   " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << "  " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << "  " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << endl;
+
+	cout << "   " << boardCharacters["verticalLine"];
+	setTextColor(levelSelectColors.world2[0]);
+	cout << "1";
+	setTextColor(15);
+	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
+	cout << boardCharacters["rightToLeft"];
+	setTextColor(levelSelectColors.world2[1]);
+	cout << "2";
+	setTextColor(15);
+	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
+	cout << boardCharacters["rightToLeft"];
+	setTextColor(levelSelectColors.world2[2]);
+	cout << "3";
+	setTextColor(15);
+	cout << boardCharacters["verticalLine"] << endl;
+
+	cout << "   " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << endl;
+
+	char typedChar = _getch();
+
+	if (typedChar == 'a' || typedChar == 'A')
+	{
+		if (currentlySelected > 0)
+		{
+			currentlySelected--;
+
+			printWorldTwo(currentlySelected);
+		}
+		else
+		{
+			printWorldOne(2);
+		}
+	}
+
+	if (typedChar == 'd' || typedChar == 'D')
+	{
+		if (currentlySelected < 2)
+		{
+			currentlySelected++;
+
+			printWorldTwo(currentlySelected);
+		}
+		else
+		{
+			printWorldThree(0);
+		}
+	}
+}
+
+void printWorldThree(int currentlySelected)
+{
+	system("cls");
+
+	setAllWorldColors(levelSelectColors.world3, 15);
+
+	setSpecificWorldColor(levelSelectColors.world3, currentlySelected, 8);
+
+	setTextColor(15);
+
+	cout << "World 3" << endl;
+	cout << endl;
+
+	cout << "   " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << "  " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << "  " << boardCharacters["topLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["topRightCorner"] << endl;
+
+	cout << "   " << boardCharacters["verticalLine"];
+	setTextColor(levelSelectColors.world3[0]);
+	cout << "1";
+	setTextColor(15);
+	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
+	cout << boardCharacters["rightToLeft"];
+	setTextColor(levelSelectColors.world3[1]);
+	cout << "2";
+	setTextColor(15);
+	cout << boardCharacters["leftToRight"] << boardCharacters["horizontalLine"] << boardCharacters["horizontalLine"];
+	cout << boardCharacters["rightToLeft"];
+	setTextColor(levelSelectColors.world3[2]);
+	cout << "3";
+	setTextColor(15);
+	cout << boardCharacters["verticalLine"] << endl;
+
+	cout << "   " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << "  " << boardCharacters["bottomLeftCorner"] << boardCharacters["horizontalLine"] << boardCharacters["bottomRightCorner"] << endl;
+
+	char typedChar = _getch();
+
+	if (typedChar == 'a' || typedChar == 'A')
+	{
+		if (currentlySelected > 0)
+		{
+			currentlySelected--;
+
+			printWorldThree(currentlySelected);
+		}
+		else
+		{
+			printWorldTwo(2);
+		}
+	}
+
+	if (typedChar == 'd' || typedChar == 'D')
+	{
+		if (currentlySelected < 2)
+		{
+			currentlySelected++;
+
+			printWorldThree(currentlySelected);
+		}
+		else
+		{
+			printWorldThree(currentlySelected);
+		}
+	}
+}
+
+void printLevelSelect(int world)
+{
+	system("cls");
+
+	switch (world)
+	{
+		case 1:
+			printWorldOne(0);
+			break;
+		case 2:
+			printWorldTwo(0);
+			break;
+		case 3:
+			printWorldThree(0);
+			break;
+	}
+}
+
+void printHowToPlay()
+{
+
+}
+
+void printAboutUs()
+{
+
+}
+
+void printExit()
+{
+
+}
+
 void printMenu(int activeOption)
 {
 	system("cls");
@@ -66,7 +331,8 @@ void printMenu(int activeOption)
 
 		printMenu(activeOption);
 	}
-	else if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == KEY_UP)
+	
+	if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == KEY_UP)
 	{
 		activeOption = (activeOption > 0) ? activeOption - 1 : 3;
 
@@ -75,6 +341,24 @@ void printMenu(int activeOption)
 		printMenu(activeOption);
 	}
 
+	if (latestKeyPress == KEY_ENTER)
+	{
+		switch (activeOption)
+		{
+			case 0:
+				printLevelSelect(1);
+				break;
+			case 1:
+				printHowToPlay();
+				break;
+			case 2:
+				printAboutUs();
+				break;
+			case 3:
+				printExit();
+				break;
+		}
+	}
 
 	printMenu(activeOption);
 }
