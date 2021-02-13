@@ -1,7 +1,5 @@
 #pragma once
 
-void initBoardCharacters();
-void initFrontEnd();
 void setTextColor(int color);
 void goToXY(short x, short y);
 void setAllMainMenuColors(int val);
