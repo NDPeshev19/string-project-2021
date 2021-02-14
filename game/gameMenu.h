@@ -1,5 +1,36 @@
 #pragma once
 
+enum class BOARD_CHARACTERS
+{
+	topLeftCorner,
+	topRightCorner,
+	bottomLeftCorner,
+	bottomRightCorner,
+	topToBottom,
+	bottomToTop,
+	leftToRight,
+	rightToLeft,
+	cross,
+	horizontalLine,
+	verticalLine,
+};
+
+char boardCharacters[];
+
+enum class WORLD_CODES
+{
+	worldOne,
+	worldTwo,
+	worldThree,
+};
+
+enum class LEVEL_CODES
+{
+	levelOne,
+	levelTwo,
+	levelThree,
+};
+
 void setTextColor(int color);
 void goToXY(short x, short y);
 void setAllMainMenuColors(int val);

@@ -1,4 +1,6 @@
 #include "gameMenu.h"
+#include "boardBackend.h"
+#include "boardFrontend.h"
 #include <conio.h>
 #include <iostream>
 #include <string>
@@ -29,20 +31,6 @@ struct level_select_colors {
 
 /*CHARACTERS FOR CELLS*/
 
-enum class BOARD_CHARACTERS
-{
-	topLeftCorner,
-	topRightCorner,
-	bottomLeftCorner,
-	bottomRightCorner,
-	topToBottom,
-	bottomToTop,
-	leftToRight,
-	rightToLeft,
-	cross,
-	horizontalLine,
-	verticalLine,
-};
 
 char boardCharacters[11] = { 218, 191, 192, 217, 194, 193, 195, 180, 197, 196, 179 };
 
@@ -157,6 +145,15 @@ void printWorldOne(int currentlySelected)
 
 			printWorldTwo(currentlySelected);
 		}
+	}
+
+	if (typedChar == KEY_ENTER)
+	{
+		startWorldGen(currentlySelected);
+
+		printBoard();
+
+		getUserInput();
 	}
 }
 

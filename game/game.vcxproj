@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="board.cpp" />
+    <ClCompile Include="boardBackend.cpp" />
+    <ClCompile Include="boardFrontend.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gameMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="board.h" />
+    <ClInclude Include="boardBackend.h" />
+    <ClInclude Include="boardFrontend.h" />
     <ClInclude Include="gameMenu.h" />
     <ClInclude Include="GRand.h" />
   </ItemGroup>

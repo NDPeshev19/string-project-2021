@@ -21,7 +21,10 @@
     <ClCompile Include="gameMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="board.cpp">
+    <ClCompile Include="boardBackend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boardFrontend.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,10 +32,13 @@
     <ClInclude Include="gameMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="board.h">
+    <ClInclude Include="GRand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GRand.h">
+    <ClInclude Include="boardBackend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boardFrontend.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "gameMenu.h"
-#include "board.h"
+#include "boardBackend.h"
 #include <iostream>
 
 using namespace std;

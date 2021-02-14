@@ -1,5 +1,6 @@
 #include "GRand.h"
-#include "board.h"
+#include "boardBackend.h"
+#include "boardFrontend.h"
 #include <string>
 #include <windows.h>
 
@@ -23,19 +24,7 @@ struct Words
 	{"habit", "peach", "world", "music", "admin", "light", "heart", "water", "house", "royal"}
 };
 
-enum class WORLD_CODES
-{
-	worldOne,
-	worldTwo,
-	worldThree,
-};
 
-enum class LEVEL_CODES
-{
-	levelOne,
-	levelTwo,
-	levelThree,
-};
 
 void assignValue(short x, short y, char character)
 {
