@@ -11,6 +11,8 @@ using namespace std;
 char board[BOARD_SIZE][BOARD_SIZE];
 char initialBoard[BOARD_SIZE][BOARD_SIZE];
 
+
+
 struct Words
 {
 	string threeLetter[10];

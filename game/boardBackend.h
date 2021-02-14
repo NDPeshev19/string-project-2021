@@ -3,8 +3,19 @@
 #include <windows.h>
 #include <string>
 
-enum class WORLD_CODES;
-enum class LEVEL_CODES;
+enum class WORLD_CODES
+{
+	worldOne,
+	worldTwo,
+	worldThree,
+};
+
+enum class LEVEL_CODES
+{
+	levelOne,
+	levelTwo,
+	levelThree,
+};
 
 void assignValue(short x, short y, char character);
 char getValue(short x, short y);
