@@ -23,6 +23,8 @@ const string mainMenuItems[4] = {
 
 int mainMenuColors[4] = { COLOR_HIGHLIGHT, COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
 
+int menuCounter = 0;
+
 struct level_select_colors {
 	int world1[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
 	int world2[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
@@ -321,11 +323,62 @@ void printMenu(int activeOption)
 {
 	system("cls");
 
-	for (int i = 0; i < 4; i++)
+	cout << endl;
+	
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)];
+
+	for (int i = 0; i < 13; i++)
 	{
-		setTextColor(mainMenuColors[i]);
-		cout << mainMenuItems[i] << endl;
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)];
 	}
+
+	cout << " Main Menu " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << endl;
+
+	for (int i = 0; i < 22; i++)
+	{
+		if (i == 2)
+		{
+			setTextColor(mainMenuColors[menuCounter]);
+			cout << "       " << mainMenuItems[menuCounter];
+			setTextColor(COLOR_MAIN);
+			cout<<"       " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << endl;
+			menuCounter++;
+		}
+
+		if (i == 4)
+		{
+			setTextColor(mainMenuColors[menuCounter]);
+			cout << "       " << mainMenuItems[menuCounter];
+			setTextColor(COLOR_MAIN);
+			cout<< "        " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << endl;
+			menuCounter++;
+		}
+
+		if (i == 6)
+		{
+			setTextColor(mainMenuColors[menuCounter]);
+			cout << "        " << mainMenuItems[menuCounter];
+			setTextColor(COLOR_MAIN);
+			cout<< "          " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << endl;
+			menuCounter++;
+		}
+
+		if (i == 8)
+		{
+			setTextColor(mainMenuColors[menuCounter]);
+			cout << "         " << mainMenuItems[menuCounter];
+			setTextColor(COLOR_MAIN);
+			cout<< "             " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << endl;
+			menuCounter++;
+		}
+
+		cout << "                          " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << endl;
+
+	}
+
+	cout << "                          " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << endl;
+
+	menuCounter = 0;
 
 	char latestKeyPress = _getch();
 
