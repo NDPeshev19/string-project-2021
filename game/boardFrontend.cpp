@@ -14,8 +14,6 @@ using namespace std;
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
 
-int counterX = 0;
-int counterY = 0;
 
 /*
 boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)]
@@ -78,12 +76,12 @@ void printFirstRow()
 
 }
 
-void printMiddleRow()
+void printMiddleRow(int counts[2])
 {
 	for (int i = 0; i < 10; i++)
 	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " " << getValue(counterX, counterY) << " ";
-		counterX++;
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " " << getValue(counts[0], counts[1]) << " ";
+		counts[0]++;
 	}
 
 	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
@@ -137,6 +135,9 @@ void printLastRow()
 void printBoard()
 {
 
+
+	int counters[2] = { 0, 0 };
+
 	system("cls");
 
 	for (int i = 0; i < BOARD_SIZE * 2; i++)
@@ -151,7 +152,7 @@ void printBoard()
 		{
 			if (i % 2 != 0)
 			{
-				printMiddleRow();
+				printMiddleRow(counters);
 
 			}
 			else if (i != 0)
@@ -166,8 +167,6 @@ void printBoard()
 		}
 	}
 
-	counterX = 0;
-	counterY = 0;
 
 	getUserInput();
 

@@ -2,7 +2,7 @@
 
 void startWorldGen(int currentlySelectedLevel);
 void printFirstRow();
-void printMiddleRow();
+void printMiddleRow(int counts[2]);
 void printBottomRow();
 void printLastRow();
 void printBoard();
