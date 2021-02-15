@@ -7,6 +7,9 @@
 using namespace std;
 
 #define BOARD_SIZE 10
+#define PLAYER_STARTING_POS_X 5
+#define PLAYER_STARTING_POS_Y 5
+#define PLAYER_CHARACTER 234
 
 char board[BOARD_SIZE][BOARD_SIZE];
 char initialBoard[BOARD_SIZE][BOARD_SIZE];
@@ -87,7 +90,7 @@ bool checkMathching(COORD* cords, COORD temp)
 
 	for (int i = 0; i < 5; i++)
 	{
-		if (cords[i].X == temp.X || cords[i].Y == temp.Y)
+		if ( (cords[i].X == temp.X && cords[i].Y == temp.Y) || (cords[i].X == PLAYER_STARTING_POS_X && cords[i].Y == PLAYER_STARTING_POS_Y))
 		{
 			flag = true;
 		}
@@ -104,6 +107,8 @@ void generateWorldOneBoard(LEVEL_CODES level)
 
 	// Generate random cordinates for the letters
 	fillCOORD(cords, 0);
+
+	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
 
 	for (int i = 0; i < 5; i++)
 	{
