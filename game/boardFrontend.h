@@ -5,6 +5,5 @@ void printFirstRow();
 void printMiddleRow();
 void printBottomRow();
 void printLastRow();
-bool inGame();
 void printBoard();
 void getUserInput();

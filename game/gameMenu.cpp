@@ -153,7 +153,6 @@ void printWorldOne(int currentlySelected)
 
 		printBoard();
 
-		getUserInput();
 	}
 }
 
@@ -367,9 +366,7 @@ void printMenu(int activeOption)
 		}
 	}
 
-	if (!inGame())
-	{
-		printMenu(activeOption);
-	}
+
+	printMenu(activeOption);
 	
 }

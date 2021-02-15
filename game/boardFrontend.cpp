@@ -1,4 +1,5 @@
 #include "gameMenu.h"
+#include "boardFrontend.h"
 #include "boardBackend.h"
 #include <iostream>
 #include <conio.h>
@@ -6,10 +7,10 @@
 using namespace std;
 
 #define BOARD_SIZE 10
-#define RESET_BUTTON 82
+#define RESET_BUTTON 114
+#define ESCAPE_BUTTON 27
 
 
-bool inGameFrontend = false;
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
 
@@ -132,21 +133,9 @@ void printLastRow()
 	cout << endl;
 }
 
-bool inGame()
-{
-	if (inGameFrontend == true)
-	{
-		return true;
-	}
-	else {
-		return false;
-	}
-}
 
 void printBoard()
 {
-
-	inGameFrontend = true;
 
 	system("cls");
 
@@ -180,11 +169,19 @@ void printBoard()
 	counterX = 0;
 	counterY = 0;
 
+	getUserInput();
+
 }
 
 void getUserInput()
 {
 	char userInput = _getch();
+
+	if (userInput == 'w')
+	{
+		//move
+		printBoard();
+	}
 
 	if (userInput == RESET_BUTTON)
 	{
@@ -192,11 +189,10 @@ void getUserInput()
 		printBoard();
 	}
 
-	if (userInput == 27)
+	if (userInput == ESCAPE_BUTTON)
 	{
-		inGameFrontend = false;
+		printMenu(0);
 	}
 
-
+	getUserInput();
 }
-
