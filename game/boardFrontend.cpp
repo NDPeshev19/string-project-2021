@@ -12,6 +12,9 @@ bool characterTurn = 0;
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
 
+int counterX = 0;
+int counterY = 0;
+
 /*
 boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)]
 boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)]
@@ -50,159 +53,110 @@ void startWorldGen(int currentlySelectedLevel)
 	}
 }
 
-
-void printHorizontalLine() {
-	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)];
-}
-
-void printHorizontalSpaces(int x, int y) {
-	cout << " " << getValue(x, y) << " ";
-}
-
-void printFirstRow(int i, int j)
-{
-	if (j == 0)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)];
-		characterTurn = 1;
-	}
-
-	if (characterTurn)
-	{
-		printHorizontalLine();
-		characterTurn = 0;
-	}
-
-	if (j % 4 == 0)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topToBottom)];
-		characterTurn = 1;
-	}
-
-	if (j == 35)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)];
-		firstRowPrinted = true;
-	}
-}
-
-void printMiddleRow(int i, int j)
-{
-	if (j == 0)
-	{
-		cout << endl;
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
-		characterTurn = 1;
-	}
-
-	if (characterTurn)
-	{
-		printHorizontalSpaces(i, j);
-		characterTurn = 0;
-	}
-
-	if (j % 4 == 0)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
-		characterTurn = 1;
-	}
-
-	if (j == 35)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
-	}
-}
-
-void printBottomRow(int i, int j)
-{
-	if (j == 0)
-	{
-		cout << endl;
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::leftToRight)];
-		characterTurn = 1;
-	}
-
-	if (characterTurn)
-	{
-		printHorizontalLine();
-		characterTurn = 0;
-	}
-
-	if (j % 4 == 0)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::cross)];
-		characterTurn = 1;
-	}
-
-	if (j == 35 && i > 0)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::rightToLeft)];
-	}
-}
-
-void printLastRow(int i, int j)
+void printFirstRow()
 {
 
-	if (j == 0)
+	int topToBottomCount = 0;
+
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)];
+
+	for (int i = 0; i < 10; i++)
 	{
-		cout << endl;
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)];
-		characterTurn = 1;
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)];
+		if (topToBottomCount != 9)
+		{
+			cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topToBottom)];
+		}
+		topToBottomCount++;
 	}
 
-	if (characterTurn)
-	{
-		printHorizontalLine();
-		characterTurn = 0;
-	}
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)];
 
-	if (j % 4 == 0)
-	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomToTop)];
-		characterTurn = 1;
-	}
+	cout << endl;
 
-	if (j == 35)
-	{
-		boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)];
-		lastRowPrinted = true;
-	}
 }
 
+void printMiddleRow()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " " << " " << " ";
+		counterX++;
+	}
+
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
+
+	cout << endl;
+}
+
+void printBottomRow()
+{
+	int crossCount = 0;
+
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::leftToRight)];
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)];
+		if (crossCount != 9)
+		{
+			cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::cross)];
+		}
+		crossCount++;
+	}
+
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::rightToLeft)];
+
+	cout << endl;
+}
+
+void printLastRow()
+{
+	int bottomToTop = 0;
+
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)];
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)];
+		if (bottomToTop != 9)
+		{
+			cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomToTop)];
+		}
+		bottomToTop++;
+	}
+
+	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)];
+
+	cout << endl;
+}
 
 void printBoard()
 {
-
-	system("cls");
-
-	for (int i = 0; i <= BOARD_SIZE + 10; i++)
+	for (int i = 0; i < BOARD_SIZE * 2; i++)
 	{
-		for (int j = 0; j < 36; j++)
+		if (i == 0)
 		{
-			if (i == 0)
+			printFirstRow();
+			firstRowPrinted = true;
+		}
+
+		if (firstRowPrinted)
+		{
+			if (i % 2 != 0)
 			{
-				printFirstRow(i, j);
-			}
-
-			if (firstRowPrinted)
-			{
-
-				if (i == 20)
-				{
-					lastRowPrinted = true;
-					printLastRow(i, j);
-				}
-
-				if (lastRowPrinted == false && i != 20 && i % 2 != 0)
-				{
-					printMiddleRow(i, j);
-				}
-				else if (lastRowPrinted == false) {
-					printBottomRow(i, j);
-				}
+				printMiddleRow();
 
 			}
+			else if (i != 0)
+			{
+				printBottomRow();
+			}
+		}
 
+		if (i == 19)
+		{
+			printLastRow();
 		}
 	}
 }
@@ -216,3 +170,4 @@ void getUserInput()
 		printMenu(0);
 	}
 }
+
