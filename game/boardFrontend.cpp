@@ -9,7 +9,7 @@ using namespace std;
 #define RESET_BUTTON 82
 
 
-bool characterTurn = 0;
+bool inGameFrontend = false;
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
 
@@ -132,8 +132,22 @@ void printLastRow()
 	cout << endl;
 }
 
+bool inGame()
+{
+	if (inGameFrontend == true)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 void printBoard()
 {
+
+	inGameFrontend = true;
+
 	system("cls");
 
 	for (int i = 0; i < BOARD_SIZE * 2; i++)
@@ -180,7 +194,7 @@ void getUserInput()
 
 	if (userInput == 27)
 	{
-		printMenu(0);
+		inGameFrontend = false;
 	}
 
 

@@ -367,5 +367,9 @@ void printMenu(int activeOption)
 		}
 	}
 
-	printMenu(activeOption);
+	if (!inGame())
+	{
+		printMenu(activeOption);
+	}
+	
 }
