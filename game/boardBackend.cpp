@@ -6,7 +6,7 @@
 
 using namespace std;
 
-#define BOARD_SIZE 10
+
 #define PLAYER_STARTING_POS_X 5
 #define PLAYER_STARTING_POS_Y 5
 #define PLAYER_CHARACTER 234
@@ -39,6 +39,17 @@ void assignValue(short x, short y, char character)
 char getValue(short x, short y)
 {
 	return board[y][x];
+}
+
+void duplicateBoard(char copy[BOARD_SIZE][BOARD_SIZE], char paste[BOARD_SIZE][BOARD_SIZE])
+{
+	for (int i = 0; i < BOARD_SIZE; i++)
+	{
+		for (int j = 0; j < BOARD_SIZE; j++)
+		{
+			paste[i][j] = copy[i][j];
+		}
+	}
 }
 
 void fillBoard(int boardSize, char filler)
@@ -99,6 +110,11 @@ bool checkMathching(COORD* cords, COORD temp)
 	return flag;
 }
 
+void resetBoard()
+{
+	duplicateBoard(initialBoard, board);
+}
+
 void generateWorldOneBoard(LEVEL_CODES level)
 {
 	string word = getWord(level);
@@ -130,7 +146,8 @@ void generateWorldOneBoard(LEVEL_CODES level)
 		assignValue(cords[i].X, cords[i].Y, word[i]);
 	}
 
-
+	// Save a copy of the board for when we want to reset the level and still have the same word
+	duplicateBoard(board, initialBoard);
 }
 
 void generateBoard(WORLD_CODES world, LEVEL_CODES level)
