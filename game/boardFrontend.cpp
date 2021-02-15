@@ -6,6 +6,7 @@
 using namespace std;
 
 #define BOARD_SIZE 10
+#define RESET_BUTTON 82
 
 
 bool characterTurn = 0;
@@ -171,9 +172,17 @@ void getUserInput()
 {
 	char userInput = _getch();
 
+	if (userInput == RESET_BUTTON)
+	{
+		resetBoard();
+		printBoard();
+	}
+
 	if (userInput == 27)
 	{
 		printMenu(0);
 	}
+
+
 }
 
