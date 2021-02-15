@@ -133,6 +133,8 @@ void printLastRow()
 
 void printBoard()
 {
+	system("cls");
+
 	for (int i = 0; i < BOARD_SIZE * 2; i++)
 	{
 		if (i == 0)
