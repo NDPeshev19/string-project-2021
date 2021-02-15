@@ -80,7 +80,7 @@ void printMiddleRow()
 {
 	for (int i = 0; i < 10; i++)
 	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " " << " " << " ";
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " " << getValue(counterX, counterY) << " ";
 		counterX++;
 	}
 
