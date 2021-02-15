@@ -161,6 +161,10 @@ void printBoard()
 			printLastRow();
 		}
 	}
+
+	counterX = 0;
+	counterY = 0;
+
 }
 
 void getUserInput()
