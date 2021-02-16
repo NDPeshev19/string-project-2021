@@ -1,11 +1,9 @@
 #include "GRand.h"
 #include "boardBackend.h"
-#include "boardFrontend.h"
 #include <string>
 #include <windows.h>
 
 using namespace std;
-
 
 #define PLAYER_STARTING_POS_X 5
 #define PLAYER_STARTING_POS_Y 5
