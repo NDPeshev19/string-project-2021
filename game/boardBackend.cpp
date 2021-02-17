@@ -12,7 +12,7 @@ using namespace std;
 char board[BOARD_SIZE][BOARD_SIZE];
 char initialBoard[BOARD_SIZE][BOARD_SIZE];
 
-
+COORD playerCoords = { PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y };
 
 struct Words
 {
@@ -164,5 +164,191 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 		//generateWorldThreeBoard(level);
 		break;
 
+	}
+}
+
+void makeMove(WORLD_CODES world, MOVES direction)
+{
+	switch (static_cast<int>(world))
+	{
+	case 0:
+		makeMoveWoldOne(direction);
+	default:
+		break;
+	}
+}
+
+void makeMoveWoldOne(MOVES direction)
+{
+	if (moveAvailableWorldOne(direction))
+	{
+		if (playerOnEdge(direction))
+		{
+			switch (direction)
+			{
+			case MOVES::up:
+				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				break;
+			case MOVES::down:
+				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				break;
+			case MOVES::left:
+				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				break;
+			case MOVES::right:
+				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			switch (direction)
+			{
+			case MOVES::up:
+				swap({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
+				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				break;
+			case MOVES::down:
+				swap({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
+				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				break;
+			case MOVES::left:
+				swap({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
+				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				break;
+			case MOVES::right:
+				swap({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
+				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+
+bool isLetter(char letter)
+{
+	letter = tolower(letter);
+	return (letter >= 97 && letter <= 122);
+}
+
+void swap(COORD first, COORD second)
+{
+	COORD tempCoord = second;
+	char tempChar = getValue(second.X, second.Y);
+
+	assignValue(second.X, second.Y, getValue(first.X, first.Y));
+	assignValue(tempCoord.X, tempCoord.Y, tempChar);
+}
+
+bool playerOnEdge(MOVES direction)
+{
+	switch (direction)
+	{
+	case MOVES::up:
+		return (playerCoords.X == 1);
+	case MOVES::down:
+		return (playerCoords.X == 8);
+	case MOVES::left:
+		return (playerCoords.Y == 1);
+	case MOVES::right:
+		return (playerCoords.Y == 8);
+	default:
+		break;
+	}
+}
+
+bool moveAvailableWorldOne(MOVES direction)
+{
+	switch (direction)
+	{
+	case MOVES::up:
+		if (playerCoords.Y == 0)
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 1 && !isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+		{
+			return true;
+		}
+		
+		if (playerCoords.Y > 1)
+		{
+			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+			{
+				return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
+			}
+		}
+
+		break;
+	
+	case MOVES::down:
+		if (playerCoords.Y == 9)
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 8 && !isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+		{
+			return true;
+		}
+
+		if (playerCoords.Y < 8)
+		{
+			if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+			{
+				return (!isLetter(getValue(playerCoords.X, playerCoords.Y + 2)));
+			}
+		}
+
+		break;
+
+	case MOVES::left:
+		if (playerCoords.X == 0)
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 1 && !isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+		{
+			return true;
+		}
+
+		if (playerCoords.X > 1)
+		{
+			if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+			{
+				return (!isLetter(getValue(playerCoords.X - 2, playerCoords.Y)));
+			}
+		}
+
+		break;
+
+	case MOVES::right:
+		if (playerCoords.X == 9)
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 8 && !isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+		{
+			return true;
+		}
+
+		if (playerCoords.X < 8)
+		{
+			if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+			{
+				return (!isLetter(getValue(playerCoords.X + 2, playerCoords.Y)));
+			}
+		}
+
+		break;
+	default:
+		return false;
 	}
 }
