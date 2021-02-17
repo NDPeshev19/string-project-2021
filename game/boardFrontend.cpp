@@ -178,7 +178,7 @@ void getUserInput()
 
 	if (userInput == 'w')
 	{
-		//move
+		makeMove(WORLD_CODES::worldOne, MOVES::up);
 		printBoard();
 	}
 
