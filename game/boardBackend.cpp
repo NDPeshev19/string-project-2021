@@ -173,7 +173,6 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 	}
 
 	resetBoard();
-	resetBoard();
 }
 
 void makeMove(WORLD_CODES world, MOVES direction)
@@ -271,14 +270,14 @@ bool playerOnEdge(MOVES direction)
 	switch (direction)
 	{
 	case MOVES::up:
-		if (playerCoords.X != 0)
+		if (playerCoords.Y != 0)
 		{
-			if (playerCoords.X == 1)
+			if (playerCoords.Y == 1)
 			{
 				return true;
 			}
 
-			if (playerCoords.X > 1)
+			if (playerCoords.Y > 1)
 			{
 				if (!isLetter(getValue(playerCoords.X, playerCoords.Y - 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y - 2)))
 				{
@@ -289,16 +288,16 @@ bool playerOnEdge(MOVES direction)
 			return false;
 		}
 
-		return true;
+		return false;
 	case MOVES::down:
-		if (playerCoords.X != 9)
+		if (playerCoords.Y != 9)
 		{
-			if (playerCoords.X == 8)
+			if (playerCoords.Y == 8)
 			{
 				return true;
 			}
 
-			if (playerCoords.X < 8)
+			if (playerCoords.Y < 8)
 			{
 				if (!isLetter(getValue(playerCoords.X, playerCoords.Y + 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y + 2)))
 				{
@@ -309,16 +308,16 @@ bool playerOnEdge(MOVES direction)
 			return false;
 		}
 
-		return true;
+		return false;
 	case MOVES::left:
-		if (playerCoords.Y != 0)
+		if (playerCoords.X != 0)
 		{
-			if (playerCoords.Y == 1)
+			if (playerCoords.X == 1)
 			{
 				return true;
 			}
 
-			if (playerCoords.Y > 1)
+			if (playerCoords.X > 1)
 			{
 				if (!isLetter(getValue(playerCoords.X - 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X - 2, playerCoords.Y)))
 				{
@@ -329,16 +328,16 @@ bool playerOnEdge(MOVES direction)
 			return false;
 		}
 
-		return true;
+		return false;
 	case MOVES::right:
-		if (playerCoords.Y != 9)
+		if (playerCoords.X != 9)
 		{
-			if (playerCoords.Y == 8)
+			if (playerCoords.X == 8)
 			{
 				return true;
 			}
 
-			if (playerCoords.Y < 8)
+			if (playerCoords.X < 8)
 			{
 				if (!isLetter(getValue(playerCoords.X + 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X + 2, playerCoords.Y)))
 				{
@@ -349,7 +348,7 @@ bool playerOnEdge(MOVES direction)
 			return false;
 		}
 
-		return true;
+		return false;
 	default:
 		break;
 	}
