@@ -86,7 +86,7 @@ COORD getRandomCOORD()
 {
 	GRand random;
 	GRand random1;
-	return { static_cast<short>(random.i(9) + 1), static_cast<short>(random.i(9) + 1) };
+	return { static_cast<short>(random.i(8) + 1), static_cast<short>(random.i(8) + 1) };
 }
 
 void fillCOORD(COORD* cords, short filler)
