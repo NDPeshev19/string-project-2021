@@ -138,7 +138,7 @@ void printBoard()
 
 	int counters[2] = { 0, 0 };
 
-	system("cls");
+	goToXY(0, 0);
 
 	for (int i = 0; i < BOARD_SIZE * 2; i++)
 	{
@@ -179,6 +179,24 @@ void getUserInput()
 	if (userInput == 'w')
 	{
 		makeMove(WORLD_CODES::worldOne, MOVES::up);
+		printBoard();
+	}
+
+	if (userInput == 'a')
+	{
+		makeMove(WORLD_CODES::worldOne, MOVES::left);
+		printBoard();
+	}
+
+	if (userInput == 'd')
+	{
+		makeMove(WORLD_CODES::worldOne, MOVES::right);
+		printBoard();
+	}
+
+	if (userInput == 's')
+	{
+		makeMove(WORLD_CODES::worldOne, MOVES::down);
 		printBoard();
 	}
 

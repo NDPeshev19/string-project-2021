@@ -151,6 +151,9 @@ void printWorldOne(int currentlySelected)
 
 	if (typedChar == KEY_ENTER)
 	{
+
+		system("cls");
+
 		startWorldGen(currentlySelected);
 
 		printBoard();
