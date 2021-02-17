@@ -103,7 +103,7 @@ bool checkMathching(COORD* cords, COORD temp)
 
 	for (int i = 0; i < 5; i++)
 	{
-		if ( (cords[i].X == temp.X && cords[i].Y == temp.Y) || (cords[i].X == PLAYER_STARTING_POS_X && cords[i].Y == PLAYER_STARTING_POS_Y))
+		if ((cords[i].X == temp.X && cords[i].Y == temp.Y) || (cords[i].X == PLAYER_STARTING_POS_X && cords[i].Y == PLAYER_STARTING_POS_Y))
 		{
 			flag = true;
 		}
@@ -115,6 +115,7 @@ bool checkMathching(COORD* cords, COORD temp)
 void resetBoard()
 {
 	duplicateBoard(initialBoard, board);
+	playerCoords = { PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y };
 }
 
 void generateWorldOneBoard(LEVEL_CODES level)
@@ -170,6 +171,9 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 	default:
 		break;
 	}
+
+	resetBoard();
+	resetBoard();
 }
 
 void makeMove(WORLD_CODES world, MOVES direction)
@@ -198,15 +202,19 @@ void makeMoveWoldOne(MOVES direction)
 			{
 			case MOVES::up:
 				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				playerCoords.Y--;
 				break;
 			case MOVES::down:
 				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				playerCoords.Y++;
 				break;
 			case MOVES::left:
 				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				playerCoords.X--;
 				break;
 			case MOVES::right:
 				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				playerCoords.X++;
 				break;
 			default:
 				break;
@@ -219,18 +227,22 @@ void makeMoveWoldOne(MOVES direction)
 			case MOVES::up:
 				swap({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
 				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				playerCoords.Y--;
 				break;
 			case MOVES::down:
 				swap({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
 				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				playerCoords.Y++;
 				break;
 			case MOVES::left:
 				swap({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
 				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				playerCoords.X--;
 				break;
 			case MOVES::right:
 				swap({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
 				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				playerCoords.X++;
 				break;
 			default:
 				break;
@@ -251,7 +263,7 @@ void swap(COORD first, COORD second)
 	char tempChar = getValue(second.X, second.Y);
 
 	assignValue(second.X, second.Y, getValue(first.X, first.Y));
-	assignValue(tempCoord.X, tempCoord.Y, tempChar);
+	assignValue(first.X, first.Y, tempChar);
 }
 
 bool playerOnEdge(MOVES direction)
@@ -259,13 +271,85 @@ bool playerOnEdge(MOVES direction)
 	switch (direction)
 	{
 	case MOVES::up:
-		return (playerCoords.X == 1);
+		if (playerCoords.X != 0)
+		{
+			if (playerCoords.X == 1)
+			{
+				return true;
+			}
+
+			if (playerCoords.X > 1)
+			{
+				if (!isLetter(getValue(playerCoords.X, playerCoords.Y - 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y - 2)))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		return true;
 	case MOVES::down:
-		return (playerCoords.X == 8);
+		if (playerCoords.X != 9)
+		{
+			if (playerCoords.X == 8)
+			{
+				return true;
+			}
+
+			if (playerCoords.X < 8)
+			{
+				if (!isLetter(getValue(playerCoords.X, playerCoords.Y + 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y + 2)))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		return true;
 	case MOVES::left:
-		return (playerCoords.Y == 1);
+		if (playerCoords.Y != 0)
+		{
+			if (playerCoords.Y == 1)
+			{
+				return true;
+			}
+
+			if (playerCoords.Y > 1)
+			{
+				if (!isLetter(getValue(playerCoords.X - 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X - 2, playerCoords.Y)))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		return true;
 	case MOVES::right:
-		return (playerCoords.Y == 8);
+		if (playerCoords.Y != 9)
+		{
+			if (playerCoords.Y == 8)
+			{
+				return true;
+			}
+
+			if (playerCoords.Y < 8)
+			{
+				if (!isLetter(getValue(playerCoords.X + 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X + 2, playerCoords.Y)))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		return true;
 	default:
 		break;
 	}
@@ -281,6 +365,11 @@ bool moveAvailableWorldOne(MOVES direction)
 			return false;
 		}
 
+		if (playerCoords.Y == 1 && isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+		{
+			return false;
+		}
+
 		if (playerCoords.Y == 1 && !isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
 		{
 			return true;
@@ -292,12 +381,20 @@ bool moveAvailableWorldOne(MOVES direction)
 			{
 				return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
 			}
+			
 		}
+
+		return true;
 
 		break;
 	
 	case MOVES::down:
 		if (playerCoords.Y == 9)
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 8 && isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
 		{
 			return false;
 		}
@@ -315,10 +412,17 @@ bool moveAvailableWorldOne(MOVES direction)
 			}
 		}
 
+		return true;
+
 		break;
 
 	case MOVES::left:
 		if (playerCoords.X == 0)
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 1 && isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
 		{
 			return false;
 		}
@@ -336,10 +440,17 @@ bool moveAvailableWorldOne(MOVES direction)
 			}
 		}
 
+		return true;
+
 		break;
 
 	case MOVES::right:
 		if (playerCoords.X == 9)
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 8 && isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
 		{
 			return false;
 		}
@@ -356,6 +467,8 @@ bool moveAvailableWorldOne(MOVES direction)
 				return (!isLetter(getValue(playerCoords.X + 2, playerCoords.Y)));
 			}
 		}
+
+		return true;
 
 		break;
 	default:
