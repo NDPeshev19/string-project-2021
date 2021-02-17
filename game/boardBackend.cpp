@@ -65,16 +65,20 @@ string getWord(LEVEL_CODES word)
 {
 	GRand random;
 	int index = random.i(11);
-	switch (static_cast<int>(word))
+
+	switch (word)
 	{
-	case 0:
+	case LEVEL_CODES::levelOne:
 		return words.threeLetter[index];
-	case 1:
+		break;
+	case LEVEL_CODES::levelTwo:
 		return words.fourLetter[index];
-	case 2:
+		break;
+	case LEVEL_CODES::levelThree:
 		return words.fiveLetter[index];
+		break;
 	default:
-		return "";
+		break;
 	}
 }
 
@@ -152,27 +156,33 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 {
 	fillBoard(BOARD_SIZE, ' ');
 
-	switch (static_cast<int>(world))
+	switch (world)
 	{
-	case 0:
+	case WORLD_CODES::worldOne:
 		generateWorldOneBoard(level);
 		break;
-	case 1:
+	case WORLD_CODES::worldTwo:
 		//generateWorldTwoBoard(level);
 		break;
-	case 2:
+	case WORLD_CODES::worldThree:
 		//generateWorldThreeBoard(level);
 		break;
-
+	default:
+		break;
 	}
 }
 
 void makeMove(WORLD_CODES world, MOVES direction)
 {
-	switch (static_cast<int>(world))
+	switch (world)
 	{
-	case 0:
+	case WORLD_CODES::worldOne:
 		makeMoveWoldOne(direction);
+		break;
+	case WORLD_CODES::worldTwo:
+		break;
+	case WORLD_CODES::worldThree:
+		break;
 	default:
 		break;
 	}
