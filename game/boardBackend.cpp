@@ -14,6 +14,8 @@ char initialBoard[BOARD_SIZE][BOARD_SIZE];
 
 COORD playerCoords = { PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y };
 
+string currentWord;
+
 struct Words
 {
 	string threeLetter[10];
@@ -57,6 +59,20 @@ void fillBoard(int boardSize, char filler)
 		for (int j = 0; j < boardSize; j++)
 		{
 			board[i][j] = filler;
+		}
+	}
+}
+
+COORD findCOORD(char letter)
+{
+	for (short i = 0; i < 10; i++)
+	{
+		for (short j = 0; j < 10; j++)
+		{
+			if (getValue(j, i) == letter)
+			{
+				return { j, i };
+			}
 		}
 	}
 }
@@ -122,6 +138,8 @@ void generateWorldOneBoard(LEVEL_CODES level)
 {
 	string word = getWord(level);
 
+	currentWord = word;
+
 	COORD cords[5];
 
 	// Generate random cordinates for the letters
@@ -132,7 +150,7 @@ void generateWorldOneBoard(LEVEL_CODES level)
 	for (int i = 0; i < 5; i++)
 	{
 		COORD temp = getRandomCOORD();
-		
+
 		if (!checkMathching(cords, temp))
 		{
 			cords[i] = temp;
@@ -373,20 +391,20 @@ bool moveAvailableWorldOne(MOVES direction)
 		{
 			return true;
 		}
-		
+
 		if (playerCoords.Y > 1)
 		{
 			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
 			{
 				return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
 			}
-			
+
 		}
 
 		return true;
 
 		break;
-	
+
 	case MOVES::down:
 		if (playerCoords.Y == 9)
 		{
@@ -471,6 +489,41 @@ bool moveAvailableWorldOne(MOVES direction)
 
 		break;
 	default:
+		return false;
+	}
+}
+
+bool winCheck(LEVEL_CODES level)
+{
+	int length = currentWord.length();
+
+	COORD firstLetterPos = findCOORD(currentWord[0]);
+
+	if (firstLetterPos.X <= 10 - length)
+	{
+		switch (length)
+		{
+		case 3:
+			return getValue(firstLetterPos.X, firstLetterPos.Y) == currentWord[0] &&
+				getValue(firstLetterPos.X + 1, firstLetterPos.Y) == currentWord[1] &&
+				getValue(firstLetterPos.X + 2, firstLetterPos.Y) == currentWord[2];
+		case 4:
+			return getValue(firstLetterPos.X, firstLetterPos.Y) == currentWord[0] &&
+				getValue(firstLetterPos.X + 1, firstLetterPos.Y) == currentWord[1] &&
+				getValue(firstLetterPos.X + 2, firstLetterPos.Y) == currentWord[2] &&
+				getValue(firstLetterPos.X + 3, firstLetterPos.Y) == currentWord[3];
+		case 5:
+			return getValue(firstLetterPos.X, firstLetterPos.Y) == currentWord[0] &&
+				getValue(firstLetterPos.X + 1, firstLetterPos.Y) == currentWord[1] &&
+				getValue(firstLetterPos.X + 2, firstLetterPos.Y) == currentWord[2] &&
+				getValue(firstLetterPos.X + 3, firstLetterPos.Y) == currentWord[3] &&
+				getValue(firstLetterPos.X + 4, firstLetterPos.Y) == currentWord[4];
+		default:
+			break;
+		}
+	}
+	else
+	{
 		return false;
 	}
 }
