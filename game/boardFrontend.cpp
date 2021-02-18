@@ -9,7 +9,10 @@ using namespace std;
 #define BOARD_SIZE 10
 #define RESET_BUTTON 114
 #define ESCAPE_BUTTON 27
-
+#define ARROW_LEFT 75
+#define ARROW_RIGHT 77
+#define ARROW_UP 72
+#define ARROW_DOWN 80
 
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
@@ -176,25 +179,25 @@ void getUserInput()
 {
 	char userInput = _getch();
 
-	if (userInput == 'w')
+	if (userInput == 'w' || userInput == ARROW_UP)
 	{
 		makeMove(WORLD_CODES::worldOne, MOVES::up);
 		printBoard();
 	}
 
-	if (userInput == 'a')
+	if (userInput == 'a' || userInput == ARROW_LEFT)
 	{
 		makeMove(WORLD_CODES::worldOne, MOVES::left);
 		printBoard();
 	}
 
-	if (userInput == 'd')
+	if (userInput == 'd' || userInput == ARROW_RIGHT)
 	{
 		makeMove(WORLD_CODES::worldOne, MOVES::right);
 		printBoard();
 	}
 
-	if (userInput == 's')
+	if (userInput == 's' || userInput == ARROW_DOWN)
 	{
 		makeMove(WORLD_CODES::worldOne, MOVES::down);
 		printBoard();
