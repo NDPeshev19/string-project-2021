@@ -8,6 +8,7 @@ using namespace std;
 #define PLAYER_STARTING_POS_X 5
 #define PLAYER_STARTING_POS_Y 5
 #define PLAYER_CHARACTER 234
+#define WALL_CHARACTER 178
 
 char board[BOARD_SIZE][BOARD_SIZE];
 char initialBoard[BOARD_SIZE][BOARD_SIZE];
@@ -171,6 +172,63 @@ void generateWorldOneBoard(LEVEL_CODES level)
 	duplicateBoard(board, initialBoard);
 }
 
+void generateWorldTwoBoard(LEVEL_CODES level)
+{
+	string word = getWord(level);
+
+	currentWord = word;
+
+	COORD letters[5];
+	COORD walls[5];
+
+	fillCOORD(letters, 0);
+	fillCOORD(walls, 0);
+
+	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
+
+	for (int i = 0; i < 5; i++)
+	{
+		COORD temp = getRandomCOORD();
+
+		if (!checkMathching(letters, temp))
+		{
+			letters[i] = temp;
+		}
+		else
+		{
+			i--;
+		}
+	}
+
+	for (int i = 0; i < int(word.size()); i++)
+	{
+		assignValue(letters[i].X, letters[i].Y, word[i]);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		COORD temp = getRandomCOORD();
+
+		char value = getValue(temp.X, temp.Y);
+
+		if (!isWall(value) &&
+			!isLetter(value) &&
+			value != PLAYER_CHARACTER)
+		{
+			walls[i] = temp;
+		}
+		else
+		{
+			i--;
+		}
+	}
+
+	for (int i = 0; i < int(word.size()); i++)
+	{
+		assignValue(walls[i].X, walls[i].Y, WALL_CHARACTER);
+	}
+}
+
 void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 {
 	fillBoard(BOARD_SIZE, ' ');
@@ -181,7 +239,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 		generateWorldOneBoard(level);
 		break;
 	case WORLD_CODES::worldTwo:
-		//generateWorldTwoBoard(level);
+		generateWorldTwoBoard(level);
 		break;
 	case WORLD_CODES::worldThree:
 		//generateWorldThreeBoard(level);
@@ -272,6 +330,11 @@ bool isLetter(char letter)
 {
 	letter = tolower(letter);
 	return (letter >= 97 && letter <= 122);
+}
+
+bool isWall(char value)
+{
+	return value == WALL_CHARACTER;
 }
 
 void swap(COORD first, COORD second)
