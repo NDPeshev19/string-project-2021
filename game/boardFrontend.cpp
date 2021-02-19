@@ -34,26 +34,75 @@ boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)]
 
 
 
-void startWorldGen(int currentlySelectedLevel)
+void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySelectedLevel)
 {
-	switch (currentlySelectedLevel)
+
+	switch (currentlySelectedWorld)
 	{
-	case 0:
-		generateBoard(WORLD_CODES::worldOne, LEVEL_CODES::levelOne);
+	case WORLD_CODES::worldOne:
+		switch (currentlySelectedLevel)
+		{
+		case LEVEL_CODES::levelOne:
+			generateWorldOneBoard(currentlySelectedLevel);
+			break;
+
+		case LEVEL_CODES::levelTwo:
+			generateWorldOneBoard(currentlySelectedLevel);
+			break;
+
+		case LEVEL_CODES::levelThree:
+			generateWorldOneBoard(currentlySelectedLevel);
+			break;
+
+		default:
+			break;
+		}
 		break;
 
-	case 1:
-		generateBoard(WORLD_CODES::worldOne, LEVEL_CODES::levelTwo);
+	case WORLD_CODES::worldTwo:
+		switch (currentlySelectedLevel)
+		{
+		case LEVEL_CODES::levelOne:
+			generateWorldTwoBoard(currentlySelectedLevel);
+			break;
+
+		case LEVEL_CODES::levelTwo:
+			generateWorldTwoBoard(currentlySelectedLevel);
+			break;
+
+		case LEVEL_CODES::levelThree:
+			generateWorldTwoBoard(currentlySelectedLevel);
+			break;
+
+		default:
+			break;
+		}
 		break;
 
-	case 2:
-		generateBoard(WORLD_CODES::worldOne, LEVEL_CODES::levelThree);
+	case WORLD_CODES::worldThree:
+		switch (currentlySelectedLevel)
+		{
+		case LEVEL_CODES::levelOne:
+			//generateWorldThreeBoard(currentlySelectedLevel);
+			break;
+
+		case LEVEL_CODES::levelTwo:
+			//generateWorldThreeBoard(currentlySelectedLevel);
+			break;
+
+		case LEVEL_CODES::levelThree:
+			//generateWorldThreeBoard(currentlySelectedLevel);
+			break;
+
+		default:
+			break;
+		}
 		break;
 
 	default:
 		break;
-
 	}
+
 }
 
 void printFirstRow()

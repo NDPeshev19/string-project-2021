@@ -1,6 +1,8 @@
 #pragma once
 
-void startWorldGen(int currentlySelectedLevel);
+#include "boardBackend.h"
+
+void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySelectedLevel);
 void printFirstRow();
 void printMiddleRow(int counts[2]);
 void printBottomRow();

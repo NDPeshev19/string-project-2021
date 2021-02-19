@@ -154,7 +154,7 @@ void printWorldOne(int currentlySelected)
 
 		system("cls");
 
-		startWorldGen(currentlySelected);
+		startWorldGen(WORLD_CODES::worldOne, static_cast<LEVEL_CODES>(currentlySelected));
 
 		printBoard();
 
@@ -223,6 +223,17 @@ void printWorldTwo(int currentlySelected)
 			printWorldThree(0);
 		}
 	}
+
+	if (typedChar == KEY_ENTER)
+	{
+
+		system("cls");
+
+		startWorldGen(WORLD_CODES::worldTwo, static_cast<LEVEL_CODES>(currentlySelected));
+
+		printBoard();
+
+	}
 }
 
 void printWorldThree(int currentlySelected)
@@ -286,6 +297,17 @@ void printWorldThree(int currentlySelected)
 		{
 			printWorldThree(currentlySelected);
 		}
+	}
+
+	if (typedChar == KEY_ENTER)
+	{
+
+		system("cls");
+
+		startWorldGen(WORLD_CODES::worldThree, static_cast<LEVEL_CODES>(currentlySelected));
+
+		printBoard();
+
 	}
 }
 
