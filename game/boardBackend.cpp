@@ -81,7 +81,7 @@ COORD findCOORD(char letter)
 string getWord(LEVEL_CODES word)
 {
 	GRand random;
-	int index = random.i(11);
+	int index = random.i(10);
 
 	switch (word)
 	{
