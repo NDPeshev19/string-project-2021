@@ -227,6 +227,8 @@ void generateWorldTwoBoard(LEVEL_CODES level)
 	{
 		assignValue(walls[i].X, walls[i].Y, WALL_CHARACTER);
 	}
+
+	duplicateBoard(board, initialBoard);
 }
 
 void generateBoard(WORLD_CODES world, LEVEL_CODES level)
