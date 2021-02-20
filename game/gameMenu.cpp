@@ -508,7 +508,7 @@ void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES curre
 
 	cout << endl;
 
-	cout << "Win Menu yes" << endl;
+	cout << "Win Menu" << endl;
 
 	cout << endl;
 	

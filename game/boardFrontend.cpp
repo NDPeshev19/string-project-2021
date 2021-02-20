@@ -16,6 +16,7 @@ using namespace std;
 #define ARROW_DOWN 80
 #define PLAYER_CHARACTER 234
 #define COLOR_MAIN 15
+#define WALL_CHARACTER 178
 
 LEVEL_CODES currentLevel;
 WORLD_CODES currentWorld;
@@ -142,7 +143,7 @@ void printMiddleRow(int counts[2])
 	{
 		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " ";
 
-		if(getValue(counts[0], counts[1]) != static_cast<char>(PLAYER_CHARACTER))
+		if(getValue(counts[0], counts[1]) != static_cast<char>(PLAYER_CHARACTER) && getValue(counts[0], counts[1]) != static_cast<char>(WALL_CHARACTER))
 		{
 			winLogic(currentLevel);
 		}
