@@ -316,7 +316,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 
 void makeMove(WORLD_CODES world, MOVES direction)
 {
-	switch (world)
+	/*switch (world)
 	{
 	case WORLD_CODES::worldOne:
 		makeMoveWoldOne(direction);
@@ -329,12 +329,9 @@ void makeMove(WORLD_CODES world, MOVES direction)
 		break;
 	default:
 		break;
-	}
-}
+	}*/
 
-void makeMoveWoldOne(MOVES direction)
-{
-	if (moveAvailableWorldOne(direction))
+	if (moveAvailable(direction))
 	{
 		if (playerOnEdge(direction))
 		{
@@ -389,65 +386,7 @@ void makeMoveWoldOne(MOVES direction)
 			}
 		}
 	}
-}
 
-void makeMoveWoldTwo(MOVES direction)
-{
-	if (moveAvailableWorldTwo(direction))
-	{
-		if (playerOnEdge(direction))
-		{
-			switch (direction)
-			{
-			case MOVES::up:
-				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
-				playerCoords.Y--;
-				break;
-			case MOVES::down:
-				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
-				playerCoords.Y++;
-				break;
-			case MOVES::left:
-				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
-				playerCoords.X--;
-				break;
-			case MOVES::right:
-				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
-				playerCoords.X++;
-				break;
-			default:
-				break;
-			}
-		}
-		else
-		{
-			switch (direction)
-			{
-			case MOVES::up:
-				swap({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
-				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
-				playerCoords.Y--;
-				break;
-			case MOVES::down:
-				swap({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
-				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
-				playerCoords.Y++;
-				break;
-			case MOVES::left:
-				swap({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
-				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
-				playerCoords.X--;
-				break;
-			case MOVES::right:
-				swap({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
-				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
-				playerCoords.X++;
-				break;
-			default:
-				break;
-			}
-		}
-	}
 }
 
 bool isLetter(char letter)
@@ -591,128 +530,7 @@ bool playerOnEdge(MOVES direction)
 	}
 }
 
-bool moveAvailableWorldOne(MOVES direction)
-{
-	switch (direction)
-	{
-	case MOVES::up:
-		if (playerCoords.Y == 0)
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 1 && isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 1 && !isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-		{
-			return true;
-		}
-
-		if (playerCoords.Y > 1)
-		{
-			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-			{
-				return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
-			}
-
-		}
-
-		return true;
-
-		break;
-
-	case MOVES::down:
-		if (playerCoords.Y == 9)
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 8 && isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 8 && !isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-		{
-			return true;
-		}
-
-		if (playerCoords.Y < 8)
-		{
-			if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-			{
-				return (!isLetter(getValue(playerCoords.X, playerCoords.Y + 2)));
-			}
-		}
-
-		return true;
-
-		break;
-
-	case MOVES::left:
-		if (playerCoords.X == 0)
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 1 && isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 1 && !isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-		{
-			return true;
-		}
-
-		if (playerCoords.X > 1)
-		{
-			if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-			{
-				return (!isLetter(getValue(playerCoords.X - 2, playerCoords.Y)));
-			}
-		}
-
-		return true;
-
-		break;
-
-	case MOVES::right:
-		if (playerCoords.X == 9)
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 8 && isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 8 && !isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-		{
-			return true;
-		}
-
-		if (playerCoords.X < 8)
-		{
-			if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-			{
-				return (!isLetter(getValue(playerCoords.X + 2, playerCoords.Y)));
-			}
-		}
-
-		return true;
-
-		break;
-	default:
-		return false;
-	}
-}
-
-bool moveAvailableWorldTwo(MOVES direction)
+bool moveAvailable(MOVES direction)
 {
 	switch (direction)
 	{
