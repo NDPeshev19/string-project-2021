@@ -325,6 +325,7 @@ void makeMove(WORLD_CODES world, MOVES direction)
 		makeMoveWoldTwo(direction);
 		break;
 	case WORLD_CODES::worldThree:
+		makeMoveWoldTwo(direction);
 		break;
 	default:
 		break;
