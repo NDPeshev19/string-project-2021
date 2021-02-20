@@ -121,7 +121,7 @@ bool checkMathching(COORD* cords, COORD temp)
 
 	for (int i = 0; i < 5; i++)
 	{
-		
+
 		if ((cords[i].X == temp.X && cords[i].Y == temp.Y) || (cords[i].X == PLAYER_STARTING_POS_X && cords[i].Y == PLAYER_STARTING_POS_Y))
 		{
 			flag = true;
@@ -135,161 +135,6 @@ void resetBoard()
 {
 	duplicateBoard(initialBoard, board);
 	playerCoords = { PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y };
-}
-
-void generateWorldOneBoard(LEVEL_CODES level)
-{
-	string word = getWord(level);
-
-	currentWord = word;
-
-	COORD cords[5];
-
-	// Generate random cordinates for the letters
-	fillCOORD(cords, 0);
-
-	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
-
-	for (int i = 0; i < 5; i++)
-	{
-		COORD temp = getRandomCOORD();
-
-		if (!checkMathching(cords, temp))
-		{
-			cords[i] = temp;
-		}
-		else
-		{
-			i--;
-		}
-	}
-
-	// Assign each letter to the correct cordinate
-	for (int i = 0; i < int(word.size()); i++)
-	{
-		assignValue(cords[i].X, cords[i].Y, word[i]);
-	}
-
-	// Save a copy of the board for when we want to reset the level and still have the same word
-	duplicateBoard(board, initialBoard);
-}
-
-void generateWorldTwoBoard(LEVEL_CODES level)
-{
-	string word = getWord(level);
-
-	currentWord = word;
-
-	COORD letters[5];
-	COORD walls[5];
-
-	fillCOORD(letters, 0);
-	fillCOORD(walls, 0);
-
-	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
-
-	for (int i = 0; i < 5; i++)
-	{
-		COORD temp = getRandomCOORD();
-
-		if (!checkMathching(letters, temp))
-		{
-			letters[i] = temp;
-		}
-		else
-		{
-			i--;
-		}
-	}
-
-	for (int i = 0; i < int(word.size()); i++)
-	{
-		assignValue(letters[i].X, letters[i].Y, word[i]);
-	}
-
-	for (int i = 0; i < 5; i++)
-	{
-		COORD temp = getRandomCOORD();
-
-		char value = getValue(temp.X, temp.Y);
-
-		if (!isWall(value) &&
-			!isLetter(value) &&
-			value != static_cast<char>(PLAYER_CHARACTER))
-		{
-			walls[i] = temp;
-		}
-		else
-		{
-			i--;
-		}
-	}
-
-	for (int i = 0; i < int(word.size()); i++)
-	{
-		assignValue(walls[i].X, walls[i].Y, WALL_CHARACTER);
-	}
-
-	duplicateBoard(board, initialBoard);
-}
-
-void generateWorldThreeBoard(LEVEL_CODES level)
-{
-	string word = getWord(level);
-
-	currentWord = word;
-
-	COORD letters[5];
-	COORD walls[5];
-
-	fillCOORD(letters, 0);
-	fillCOORD(walls, 0);
-
-	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
-
-	for (int i = 0; i < 5; i++)
-	{
-		COORD temp = getRandomCOORD();
-
-		if (!checkMathching(letters, temp))
-		{
-			letters[i] = temp;
-		}
-		else
-		{
-			i--;
-		}
-	}
-
-	for (int i = 0; i < int(word.size()); i++)
-	{
-		assignValue(letters[i].X, letters[i].Y, word[i]);
-	}
-
-	for (int i = 0; i < 5; i++)
-	{
-		COORD temp = getRandomCOORD();
-
-		char value = getValue(temp.X, temp.Y);
-
-		if (!isWall(value) &&
-			!isLetter(value) &&
-			value != static_cast<char>(PLAYER_CHARACTER))
-		{
-			walls[i] = temp;
-		}
-		else
-		{
-			i--;
-		}
-	}
-
-	for (int i = 0; i < int(word.size()); i++)
-	{
-		assignValue(walls[i].X, walls[i].Y, LETTER_TRAP_CHARACTER);
-	}
-
-	duplicateBoard(board, initialBoard);
 }
 
 void generateBoard(WORLD_CODES world, LEVEL_CODES level)
@@ -324,7 +169,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 	{
 		assignValue(letters[i].X, letters[i].Y, word[i]);
 	}
-	
+
 	if (world != WORLD_CODES::worldOne)
 	{
 		for (int i = 0; i < int(word.size()); i++)
@@ -358,21 +203,6 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 
 void makeMove(WORLD_CODES world, MOVES direction)
 {
-	/*switch (world)
-	{
-	case WORLD_CODES::worldOne:
-		makeMoveWoldOne(direction);
-		break;
-	case WORLD_CODES::worldTwo:
-		makeMoveWoldTwo(direction);
-		break;
-	case WORLD_CODES::worldThree:
-		makeMoveWoldTwo(direction);
-		break;
-	default:
-		break;
-	}*/
-
 	if (moveAvailable(direction))
 	{
 		if (playerOnEdge(direction))
@@ -428,7 +258,6 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			}
 		}
 	}
-
 }
 
 bool isLetter(char letter)
