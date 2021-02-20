@@ -182,6 +182,8 @@ void printWorldOne(int currentlySelected)
 		printBoard();
 
 	}
+
+	printWorldOne(currentlySelected);
 }
 
 void printWorldTwo(int currentlySelected)
@@ -257,6 +259,8 @@ void printWorldTwo(int currentlySelected)
 		printBoard();
 
 	}
+
+	printWorldTwo(currentlySelected);
 }
 
 void printWorldThree(int currentlySelected)
@@ -334,6 +338,8 @@ void printWorldThree(int currentlySelected)
 		winLogic(static_cast<LEVEL_CODES>(currentlySelected));
 
 	}
+
+	printWorldThree(currentlySelected);
 }
 
 void printLevelSelect(int world)
