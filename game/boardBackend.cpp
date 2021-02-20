@@ -296,20 +296,62 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 {
 	fillBoard(BOARD_SIZE, ' ');
 
-	switch (world)
+	string word = getWord(level);
+
+	currentWord = word;
+
+	COORD letters[5];
+
+	fillCOORD(letters, 0);
+
+	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
+
+	for (int i = 0; i < 5; i++)
 	{
-	case WORLD_CODES::worldOne:
-		generateWorldOneBoard(level);
-		break;
-	case WORLD_CODES::worldTwo:
-		generateWorldTwoBoard(level);
-		break;
-	case WORLD_CODES::worldThree:
-		generateWorldThreeBoard(level);
-		break;
-	default:
-		break;
+		COORD temp = getRandomCOORD();
+
+		if (!checkMathching(letters, temp))
+		{
+			letters[i] = temp;
+		}
+		else
+		{
+			i--;
+		}
 	}
+
+	for (int i = 0; i < int(word.size()); i++)
+	{
+		assignValue(letters[i].X, letters[i].Y, word[i]);
+	}
+	
+	if (world != WORLD_CODES::worldOne)
+	{
+		for (int i = 0; i < int(word.size()); i++)
+		{
+			COORD temp = getRandomCOORD();
+
+			char value = getValue(temp.X, temp.Y);
+
+			if (isAvailable(value))
+			{
+				if (world == WORLD_CODES::worldTwo)
+				{
+					assignValue(temp.X, temp.Y, WALL_CHARACTER);
+				}
+				else
+				{
+					assignValue(temp.X, temp.Y, LETTER_TRAP_CHARACTER);
+				}
+			}
+			else
+			{
+				i--;
+			}
+		}
+	}
+
+	duplicateBoard(board, initialBoard);
 
 	resetBoard();
 }
@@ -398,6 +440,11 @@ bool isLetter(char letter)
 bool isWall(char value)
 {
 	return value == WALL_CHARACTER;
+}
+
+bool isAvailable(char value)
+{
+	return value == ' ';
 }
 
 void swap(COORD first, COORD second)

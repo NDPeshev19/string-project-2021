@@ -46,6 +46,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level);
 void makeMove(WORLD_CODES world, MOVES direction);
 bool isLetter(char letter);
 bool isWall(char value);
+bool isAvailable(char value);
 void swap(COORD first, COORD second);
 bool playerOnEdge(MOVES direction);
 bool moveAvailable(MOVES direction);
