@@ -331,7 +331,7 @@ void makeMoveWoldOne(MOVES direction)
 
 void makeMoveWoldTwo(MOVES direction)
 {
-	if (moveAvailableWorldOne(direction))
+	if (moveAvailableWorldTwo(direction))
 	{
 		if (playerOnEdge(direction))
 		{
@@ -426,6 +426,14 @@ bool playerOnEdge(MOVES direction)
 				{
 					return true;
 				}
+
+				if (getValue(playerCoords.X, playerCoords.Y - 1) == ' ')
+				{
+					if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(WALL_CHARACTER))
+					{
+						return true;
+					}
+				}
 			}
 
 			return false;
@@ -445,6 +453,14 @@ bool playerOnEdge(MOVES direction)
 				if (!isLetter(getValue(playerCoords.X, playerCoords.Y + 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y + 2)))
 				{
 					return true;
+				}
+
+				if (getValue(playerCoords.X, playerCoords.Y + 1) == ' ')
+				{
+					if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(WALL_CHARACTER))
+					{
+						return true;
+					}
 				}
 			}
 
@@ -468,6 +484,14 @@ bool playerOnEdge(MOVES direction)
 				}
 			}
 
+			if (getValue(playerCoords.X - 1, playerCoords.Y) == ' ')
+			{
+				if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+				{
+					return true;
+				}
+			}
+
 			return false;
 		}
 
@@ -483,6 +507,14 @@ bool playerOnEdge(MOVES direction)
 			if (playerCoords.X < 8)
 			{
 				if (!isLetter(getValue(playerCoords.X + 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X + 2, playerCoords.Y)))
+				{
+					return true;
+				}
+			}
+
+			if (getValue(playerCoords.X + 1, playerCoords.Y) == ' ')
+			{
+				if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
 				{
 					return true;
 				}
