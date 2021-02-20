@@ -21,9 +21,16 @@ const string mainMenuItems[4] = {
 	"Exit"
 };
 
+const string winMenuItems[2] = {
+	"Next Level",
+	"Exit"
+};
+
 int mainMenuColors[4] = { COLOR_HIGHLIGHT, COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
 
 int menuCounter = 0;
+
+int winMenuColors[2] = { COLOR_HIGHLIGHT, COLOR_MAIN };
 
 struct level_select_colors {
 	int world1[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
@@ -71,12 +78,28 @@ void setAllMainMenuColors(int val)
 	}
 }
 
+void setAllWinMenuColors(int val)
+{
+	for (int i = 0; i < 2; i++)
+	{
+		winMenuColors[i] = val;
+	}
+}
+
 void updateMainMenuColors(int num)
 {
 	setAllMainMenuColors(COLOR_MAIN);
 
 	mainMenuColors[num] = COLOR_HIGHLIGHT;
 }
+
+void updateWinMenuColors(int num)
+{
+	setAllWinMenuColors(COLOR_MAIN);
+
+	winMenuColors[num] = COLOR_HIGHLIGHT;
+}
+
 
 void setAllWorldColors(int world[], int color)
 {
@@ -348,6 +371,8 @@ void printExit()
 
 void printMenu(int activeOption)
 {
+	setTextColor(COLOR_MAIN);
+
 	system("cls");
 
 	cout << endl;
@@ -449,4 +474,108 @@ void printMenu(int activeOption)
 
 	printMenu(activeOption);
 	
+}
+
+WORLD_CODES incrementWorld(WORLD_CODES world)
+{
+	int temp = static_cast<int>(world);
+	temp++;
+	world = static_cast<WORLD_CODES>(temp);
+
+	return world;
+}
+
+LEVEL_CODES incrementLevel(LEVEL_CODES level)
+{
+	int temp = static_cast<int>(level);
+	temp++;
+	level = static_cast<LEVEL_CODES>(temp);
+
+	return level;
+}
+
+void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES currentWorld)
+{
+	system("cls");
+
+	setTextColor(7);
+
+	cout << endl;
+
+	cout << "Win Menu yes" << endl;
+
+	cout << endl;
+	
+	for (int i = 0; i < 2; i++)
+	{
+		setTextColor(winMenuColors[i]);
+		cout << winMenuItems[i] << endl;
+	}
+
+
+	char latestKeyPress = _getch();
+
+	if (latestKeyPress == 's' || latestKeyPress == 'S' || latestKeyPress == KEY_DOWN)
+	{
+		
+		if (activeOption == 1)
+		{
+			activeOption = 0;
+		}
+		else {
+			activeOption++;
+		}
+
+		updateWinMenuColors(activeOption);
+
+		printWinMenu(activeOption, previousLevel, currentWorld);
+	}
+
+	if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == KEY_UP)
+	{
+		if (activeOption == 0)
+		{
+			activeOption = 1;
+		}
+		else {
+			activeOption--;
+		}
+
+
+		updateWinMenuColors(activeOption);
+
+		printWinMenu(activeOption, previousLevel, currentWorld);
+	}
+
+	if (latestKeyPress == KEY_ENTER)
+	{
+
+		
+
+		switch (activeOption)
+		{
+		case 0:
+			previousLevel = incrementLevel(previousLevel);
+
+			if (static_cast<int>(previousLevel) == 3)
+			{
+				currentWorld = incrementWorld(currentWorld);
+				previousLevel = LEVEL_CODES::levelOne;
+			}
+
+			//Add case if world is 3 and level is 3
+
+			startWorldGen(currentWorld, previousLevel);
+			printBoard();
+		break;
+
+		case 1:
+			printMenu(0);
+			break;
+
+		}
+	}
+
+	printWinMenu(activeOption, previousLevel, currentWorld);
+
 }

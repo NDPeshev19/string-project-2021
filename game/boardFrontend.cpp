@@ -9,13 +9,16 @@ using namespace std;
 #define BOARD_SIZE 10
 #define RESET_BUTTON 114
 #define ESCAPE_BUTTON 27
+#define ENTER_KEY 13
 #define ARROW_LEFT 75
 #define ARROW_RIGHT 77
 #define ARROW_UP 72
 #define ARROW_DOWN 80
 #define PLAYER_CHARACTER 234
+#define COLOR_MAIN 15
 
 LEVEL_CODES currentLevel;
+WORLD_CODES currentWorld;
 
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
@@ -38,6 +41,7 @@ boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)]
 
 void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySelectedLevel)
 {
+	currentWorld = currentlySelectedWorld;
 	currentLevel = currentlySelectedLevel;
 
 	switch (currentlySelectedWorld)
@@ -110,7 +114,7 @@ void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySele
 
 void printFirstRow()
 {
-	setTextColor(7);
+	setTextColor(15);
 
 	int topToBottomCount = 0;
 
@@ -144,7 +148,7 @@ void printMiddleRow(int counts[2])
 		}
 
 		cout << getValue(counts[0], counts[1]);
-		setTextColor(7);
+		setTextColor(15);
 		cout<< " ";
 		counts[0]++;
 	}
@@ -194,6 +198,11 @@ void printLastRow()
 	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)];
 
 	cout << endl;
+
+	if (winCheck(currentLevel))
+	{
+		cout << "Click ENTER to continue:";
+	}
 }
 
 void printBoard()
@@ -285,6 +294,14 @@ void getUserInput()
 	if (userInput == ESCAPE_BUTTON)
 	{
 		printMenu(0);
+	}
+
+	if (winCheck(currentLevel))
+	{
+		if (userInput == ENTER_KEY)
+		{
+			printWinMenu(0, currentLevel, currentWorld);
+		}
 	}
 
 	

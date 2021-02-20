@@ -10,6 +10,7 @@ enum class WORLD_CODES
 	worldOne,
 	worldTwo,
 	worldThree,
+	worldFour,
 };
 
 enum class LEVEL_CODES
@@ -17,6 +18,7 @@ enum class LEVEL_CODES
 	levelOne,
 	levelTwo,
 	levelThree,
+	levelFour,
 };
 
 enum class MOVES
