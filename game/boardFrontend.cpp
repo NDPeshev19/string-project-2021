@@ -263,25 +263,25 @@ void getUserInput()
 
 	if (userInput == 'w' || userInput == ARROW_UP)
 	{
-		makeMove(WORLD_CODES::worldOne, MOVES::up);
+		makeMove(currentWorld, MOVES::up);
 		printBoard();
 	}
 
 	if (userInput == 'a' || userInput == ARROW_LEFT)
 	{
-		makeMove(WORLD_CODES::worldOne, MOVES::left);
+		makeMove(currentWorld, MOVES::left);
 		printBoard();
 	}
 
 	if (userInput == 'd' || userInput == ARROW_RIGHT)
 	{
-		makeMove(WORLD_CODES::worldOne, MOVES::right);
+		makeMove(currentWorld, MOVES::right);
 		printBoard();
 	}
 
 	if (userInput == 's' || userInput == ARROW_DOWN)
 	{
-		makeMove(WORLD_CODES::worldOne, MOVES::down);
+		makeMove(currentWorld, MOVES::down);
 		printBoard();
 	}
 
