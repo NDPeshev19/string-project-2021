@@ -257,6 +257,7 @@ void winLogic(LEVEL_CODES currentlySelectedLevel)
 
 void getUserInput()
 {
+
 	char userInput = _getch();
 
 	winLogic(currentLevel);
