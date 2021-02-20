@@ -308,6 +308,8 @@ void printWorldThree(int currentlySelected)
 
 		printBoard();
 
+		winLogic(static_cast<LEVEL_CODES>(currentlySelected));
+
 	}
 }
 

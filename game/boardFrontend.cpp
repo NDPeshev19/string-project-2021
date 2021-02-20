@@ -13,10 +13,12 @@ using namespace std;
 #define ARROW_RIGHT 77
 #define ARROW_UP 72
 #define ARROW_DOWN 80
+#define PLAYER_CHARACTER 234
+
+LEVEL_CODES currentLevel;
 
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
-
 
 /*
 boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)]
@@ -36,6 +38,7 @@ boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)]
 
 void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySelectedLevel)
 {
+	currentLevel = currentlySelectedLevel;
 
 	switch (currentlySelectedWorld)
 	{
@@ -107,6 +110,7 @@ void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySele
 
 void printFirstRow()
 {
+	setTextColor(7);
 
 	int topToBottomCount = 0;
 
@@ -132,7 +136,16 @@ void printMiddleRow(int counts[2])
 {
 	for (int i = 0; i < 10; i++)
 	{
-		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " " << getValue(counts[0], counts[1]) << " ";
+		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " ";
+
+		if(getValue(counts[0], counts[1]) != static_cast<char>(PLAYER_CHARACTER))
+		{
+			winLogic(currentLevel);
+		}
+
+		cout << getValue(counts[0], counts[1]);
+		setTextColor(7);
+		cout<< " ";
 		counts[0]++;
 	}
 
@@ -183,7 +196,6 @@ void printLastRow()
 	cout << endl;
 }
 
-
 void printBoard()
 {
 
@@ -224,9 +236,21 @@ void printBoard()
 
 }
 
+void winLogic(LEVEL_CODES currentlySelectedLevel)
+{
+	if (winCheck(currentlySelectedLevel) == true)
+	{
+		setTextColor(2);
+	}
+
+
+}
+
 void getUserInput()
 {
 	char userInput = _getch();
+
+	winLogic(currentLevel);
 
 	if (userInput == 'w' || userInput == ARROW_UP)
 	{
@@ -263,5 +287,7 @@ void getUserInput()
 		printMenu(0);
 	}
 
+	
 	getUserInput();
 }
+

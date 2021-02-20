@@ -8,4 +8,7 @@ void printMiddleRow(int counts[2]);
 void printBottomRow();
 void printLastRow();
 void printBoard();
+void winLogic(LEVEL_CODES currentlySelectedLevel);
 void getUserInput();
+
+
