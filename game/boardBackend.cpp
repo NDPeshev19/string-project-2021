@@ -120,6 +120,7 @@ bool checkMathching(COORD* cords, COORD temp)
 
 	for (int i = 0; i < 5; i++)
 	{
+		
 		if ((cords[i].X == temp.X && cords[i].Y == temp.Y) || (cords[i].X == PLAYER_STARTING_POS_X && cords[i].Y == PLAYER_STARTING_POS_Y))
 		{
 			flag = true;
@@ -213,7 +214,7 @@ void generateWorldTwoBoard(LEVEL_CODES level)
 
 		if (!isWall(value) &&
 			!isLetter(value) &&
-			value != PLAYER_CHARACTER)
+			value != static_cast<char>(PLAYER_CHARACTER))
 		{
 			walls[i] = temp;
 		}
