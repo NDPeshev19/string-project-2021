@@ -8,7 +8,8 @@ using namespace std;
 #define PLAYER_STARTING_POS_X 5
 #define PLAYER_STARTING_POS_Y 5
 #define PLAYER_CHARACTER 234
-#define WALL_CHARACTER 178
+#define WALL_CHARACTER 219
+#define LETTER_TRAP_CHARACTER 178
 
 char board[BOARD_SIZE][BOARD_SIZE];
 char initialBoard[BOARD_SIZE][BOARD_SIZE];
