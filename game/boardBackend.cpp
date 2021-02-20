@@ -233,6 +233,65 @@ void generateWorldTwoBoard(LEVEL_CODES level)
 	duplicateBoard(board, initialBoard);
 }
 
+void generateWorldThreeBoard(LEVEL_CODES level)
+{
+	string word = getWord(level);
+
+	currentWord = word;
+
+	COORD letters[5];
+	COORD walls[5];
+
+	fillCOORD(letters, 0);
+	fillCOORD(walls, 0);
+
+	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
+
+	for (int i = 0; i < 5; i++)
+	{
+		COORD temp = getRandomCOORD();
+
+		if (!checkMathching(letters, temp))
+		{
+			letters[i] = temp;
+		}
+		else
+		{
+			i--;
+		}
+	}
+
+	for (int i = 0; i < int(word.size()); i++)
+	{
+		assignValue(letters[i].X, letters[i].Y, word[i]);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		COORD temp = getRandomCOORD();
+
+		char value = getValue(temp.X, temp.Y);
+
+		if (!isWall(value) &&
+			!isLetter(value) &&
+			value != static_cast<char>(PLAYER_CHARACTER))
+		{
+			walls[i] = temp;
+		}
+		else
+		{
+			i--;
+		}
+	}
+
+	for (int i = 0; i < int(word.size()); i++)
+	{
+		assignValue(walls[i].X, walls[i].Y, LETTER_TRAP_CHARACTER);
+	}
+
+	duplicateBoard(board, initialBoard);
+}
+
 void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 {
 	fillBoard(BOARD_SIZE, ' ');
@@ -246,7 +305,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 		generateWorldTwoBoard(level);
 		break;
 	case WORLD_CODES::worldThree:
-		//generateWorldThreeBoard(level);
+		generateWorldThreeBoard(level);
 		break;
 	default:
 		break;

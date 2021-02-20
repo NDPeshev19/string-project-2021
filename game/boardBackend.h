@@ -41,6 +41,7 @@ bool checkMathching(COORD* cords, COORD temp);
 void resetBoard();
 void generateWorldOneBoard(LEVEL_CODES level);
 void generateWorldTwoBoard(LEVEL_CODES level);
+void generateWorldThreeBoard(LEVEL_CODES level);
 void generateBoard(WORLD_CODES world, LEVEL_CODES level);
 void makeMove(WORLD_CODES world, MOVES direction);
 void makeMoveWoldOne(MOVES direction);
