@@ -261,6 +261,7 @@ void makeMove(WORLD_CODES world, MOVES direction)
 		makeMoveWoldOne(direction);
 		break;
 	case WORLD_CODES::worldTwo:
+		makeMoveWoldTwo(direction);
 		break;
 	case WORLD_CODES::worldThree:
 		break;
@@ -270,6 +271,65 @@ void makeMove(WORLD_CODES world, MOVES direction)
 }
 
 void makeMoveWoldOne(MOVES direction)
+{
+	if (moveAvailableWorldOne(direction))
+	{
+		if (playerOnEdge(direction))
+		{
+			switch (direction)
+			{
+			case MOVES::up:
+				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				playerCoords.Y--;
+				break;
+			case MOVES::down:
+				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				playerCoords.Y++;
+				break;
+			case MOVES::left:
+				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				playerCoords.X--;
+				break;
+			case MOVES::right:
+				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				playerCoords.X++;
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			switch (direction)
+			{
+			case MOVES::up:
+				swap({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
+				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				playerCoords.Y--;
+				break;
+			case MOVES::down:
+				swap({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
+				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				playerCoords.Y++;
+				break;
+			case MOVES::left:
+				swap({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
+				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				playerCoords.X--;
+				break;
+			case MOVES::right:
+				swap({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
+				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				playerCoords.X++;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+}
+
+void makeMoveWoldTwo(MOVES direction)
 {
 	if (moveAvailableWorldOne(direction))
 	{
@@ -527,6 +587,203 @@ bool moveAvailableWorldOne(MOVES direction)
 		break;
 
 	case MOVES::right:
+		if (playerCoords.X == 9)
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 8 && isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 8 && !isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+		{
+			return true;
+		}
+
+		if (playerCoords.X < 8)
+		{
+			if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+			{
+				return (!isLetter(getValue(playerCoords.X + 2, playerCoords.Y)));
+			}
+		}
+
+		return true;
+
+		break;
+	default:
+		return false;
+	}
+}
+
+bool moveAvailableWorldTwo(MOVES direction)
+{
+	switch (direction)
+	{
+	case MOVES::up:
+		if (playerCoords.Y != 0)
+		{
+			if (getValue(playerCoords.X, playerCoords.Y - 1) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+
+		if (playerCoords.Y > 1)
+		{
+			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+			{
+				if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(WALL_CHARACTER))
+				{
+					return false;
+				}
+			}
+		}
+
+		if (playerCoords.Y == 0)
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 1 && isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 1 && !isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+		{
+			return true;
+		}
+
+		if (playerCoords.Y > 1)
+		{
+			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+			{
+				return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
+			}
+
+		}
+
+		return true;
+
+		break;
+
+	case MOVES::down:
+		if (playerCoords.Y != 9)
+		{
+			if (getValue(playerCoords.X, playerCoords.Y + 1) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+
+		if (playerCoords.Y < 8)
+		{
+			if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+			{
+				if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(WALL_CHARACTER))
+				{
+					return false;
+				}
+			}
+		}
+
+		if (playerCoords.Y == 9)
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 8 && isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+		{
+			return false;
+		}
+
+		if (playerCoords.Y == 8 && !isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+		{
+			return true;
+		}
+
+		if (playerCoords.Y < 8)
+		{
+			if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+			{
+				return (!isLetter(getValue(playerCoords.X, playerCoords.Y + 2)));
+			}
+		}
+
+		return true;
+
+		break;
+
+	case MOVES::left:
+		if (playerCoords.X != 0)
+		{
+			if (getValue(playerCoords.X - 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+
+		if (playerCoords.X > 1)
+		{
+			if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+			{
+				if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+				{
+					return false;
+				}
+			}
+		}
+
+		if (playerCoords.X == 0)
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 1 && isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+		{
+			return false;
+		}
+
+		if (playerCoords.X == 1 && !isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+		{
+			return true;
+		}
+
+		if (playerCoords.X > 1)
+		{
+			if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+			{
+				return (!isLetter(getValue(playerCoords.X - 2, playerCoords.Y)));
+			}
+		}
+
+		return true;
+
+		break;
+
+	case MOVES::right:
+		if (playerCoords.X != 9)
+		{
+			if (getValue(playerCoords.X + 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+
+		if (playerCoords.X < 8)
+		{
+			if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+			{
+				if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+				{
+					return false;
+				}
+			}
+		}
+
 		if (playerCoords.X == 9)
 		{
 			return false;
