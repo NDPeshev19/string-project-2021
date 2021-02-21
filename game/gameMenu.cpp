@@ -5,12 +5,17 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <cstdlib>
 
+#define ESCAPE_BUTTON 27
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_ENTER 13
 #define COLOR_MAIN 15
 #define COLOR_HIGHLIGHT 8
+#define PLAYER_CHARACTER 234
+
+int page = 0;
 
 using namespace std;
 
@@ -360,9 +365,91 @@ void printLevelSelect(int world)
 	}
 }
 
+void resetHowToPlay()
+{
+	goToXY(30, 7);
+	cout << "	                                                                                    ";
+	goToXY(30, 8);
+	cout << "	                                                                                    ";
+	goToXY(30, 9);
+	cout << "	                                                                                    ";
+	goToXY(30, 10);
+	cout << "	                                                                                    ";
+}
+
 void printHowToPlay()
 {
 
+	resetHowToPlay();
+
+	switch (page)
+	{
+		case 0:
+			goToXY(38, 10);
+			cout << "This is your player - " << char(234) << ". You move with W-A-S-D or using the arrow keys.";
+			goToXY(65, 12);
+			cout << "<Page 1/4>";
+			break;
+
+		case 1:
+			goToXY(38, 9);
+			cout << "Your goal is to create a meaningful word, by pushing the letters together,";
+			goToXY(38, 10);
+			cout << "around the map.";
+			goToXY(65, 12);
+			cout << "<Page 2/4>";
+			break;
+
+		case 2:
+			goToXY(38, 7);
+			cout << "	By progressing through the different levels and worlds you will experience";
+			goToXY(38, 8);
+			cout << "more and more challenging words. At one point you will face walls, which ";
+			goToXY(38, 9);
+			cout << "will prevent you from moving and letter traps that will change the position";
+			goToXY(38, 10);
+			cout << "of anything that steps on them.";
+			goToXY(65, 12);
+			cout << "<Page 3/4>";
+			break;
+
+		case 3:
+			goToXY(58, 10);
+			cout << "Good luck and have fun :)";
+			goToXY(65, 12);
+			cout << "<Page 4/4>";
+			break;
+
+	default:
+		break;
+	}
+
+
+
+	char input = _getch();
+
+	if (input == 'A' || input == 'a')
+	{
+		if (page != 0)
+		{
+			page--;
+		}
+	}
+
+	if (input == 'D' || input == 'd')
+	{
+		if (page != 3)
+		{
+			page++;
+		}
+	}
+
+	if (input == ESCAPE_BUTTON)
+	{
+		printMenu(1);
+	}
+
+	printHowToPlay();
 }
 
 void printAboutUs()
@@ -472,7 +559,7 @@ void printMenu(int activeOption)
 				printAboutUs();
 				break;
 			case 3:
-				printExit();
+				exit(0);
 				break;
 		}
 	}
