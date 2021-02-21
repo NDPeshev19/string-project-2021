@@ -45,71 +45,7 @@ void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySele
 	currentWorld = currentlySelectedWorld;
 	currentLevel = currentlySelectedLevel;
 
-	switch (currentlySelectedWorld)
-	{
-	case WORLD_CODES::worldOne:
-		switch (currentlySelectedLevel)
-		{
-		case LEVEL_CODES::levelOne:
-			generateBoard(WORLD_CODES::worldOne, LEVEL_CODES::levelOne);
-			break;
-
-		case LEVEL_CODES::levelTwo:
-			generateBoard(WORLD_CODES::worldOne, LEVEL_CODES::levelTwo);
-			break;
-
-		case LEVEL_CODES::levelThree:
-			generateBoard(WORLD_CODES::worldOne, LEVEL_CODES::levelThree);
-			break;
-
-		default:
-			break;
-		}
-		break;
-
-	case WORLD_CODES::worldTwo:
-		switch (currentlySelectedLevel)
-		{
-		case LEVEL_CODES::levelOne:
-			generateBoard(WORLD_CODES::worldTwo, LEVEL_CODES::levelOne);
-			break;
-
-		case LEVEL_CODES::levelTwo:
-			generateBoard(WORLD_CODES::worldTwo, LEVEL_CODES::levelTwo);
-			break;
-
-		case LEVEL_CODES::levelThree:
-			generateBoard(WORLD_CODES::worldTwo, LEVEL_CODES::levelThree);
-			break;
-
-		default:
-			break;
-		}
-		break;
-
-	case WORLD_CODES::worldThree:
-		switch (currentlySelectedLevel)
-		{
-		case LEVEL_CODES::levelOne:
-			generateBoard(WORLD_CODES::worldThree, LEVEL_CODES::levelOne);
-			break;
-
-		case LEVEL_CODES::levelTwo:
-			generateBoard(WORLD_CODES::worldThree, LEVEL_CODES::levelTwo);
-			break;
-
-		case LEVEL_CODES::levelThree:
-			generateBoard(WORLD_CODES::worldThree, LEVEL_CODES::levelThree);
-			break;
-
-		default:
-			break;
-		}
-		break;
-
-	default:
-		break;
-	}
+	generateBoard(currentlySelectedWorld, currentlySelectedLevel);
 
 }
 
