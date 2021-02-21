@@ -79,7 +79,7 @@ void printMiddleRow(int counts[2])
 	{
 		cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " ";
 
-		if(getValue(counts[0], counts[1]) != static_cast<char>(PLAYER_CHARACTER) && getValue(counts[0], counts[1]) != static_cast<char>(WALL_CHARACTER))
+		if(isLetter(getValue(counts[0], counts[1])))
 		{
 			winLogic(currentLevel);
 		}
