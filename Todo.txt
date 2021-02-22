@@ -1,8 +1,0 @@
-page global var
-how to play strelka
-level select escape
-menuCounter remove
-add forward indent
-char(PLAYER_CHARACTER)
-delete Exit function
-clean up main menu if
