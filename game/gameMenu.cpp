@@ -11,6 +11,8 @@
 #define KEY_UP 72
 #define KEY_DOWN 80
 #define KEY_ENTER 13
+#define ARROW_LEFT 75
+#define ARROW_RIGHT 77
 #define COLOR_MAIN 15
 #define COLOR_HIGHLIGHT 8
 #define PLAYER_CHARACTER 234
@@ -32,8 +34,6 @@ const string winMenuItems[2] = {
 };
 
 int mainMenuColors[4] = { COLOR_HIGHLIGHT, COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
-
-int menuCounter = 0;
 
 int winMenuColors[2] = { COLOR_HIGHLIGHT, COLOR_MAIN };
 
@@ -379,36 +379,42 @@ void resetHowToPlay()
 
 void printHowToPlay()
 {
+	int forwardIndent = 38;
+
+	string sentences[4] = {
+	"	By progressing through the different levels and worlds you will experience",
+	"more and more challenging words. At one point you will face walls, which ",
+	"will prevent you from moving and letter traps that will change the position",
+	"of anything that steps on them.",
+	};
 
 	resetHowToPlay();
 
 	switch (page)
 	{
 		case 0:
-			goToXY(38, 10);
-			cout << "This is your player - " << char(234) << ". You move with W-A-S-D or using the arrow keys.";
+			goToXY(forwardIndent, 10);
+			cout << "This is your player - " << char(PLAYER_CHARACTER) << ". You move with W-A-S-D or using the arrow keys.";
 			goToXY(65, 12);
 			cout << "<Page 1/4>";
 			break;
 
 		case 1:
-			goToXY(38, 9);
+			goToXY(forwardIndent, 9);
 			cout << "Your goal is to create a meaningful word, by pushing the letters together,";
-			goToXY(38, 10);
+			goToXY(forwardIndent, 10);
 			cout << "around the map.";
 			goToXY(65, 12);
 			cout << "<Page 2/4>";
 			break;
 
 		case 2:
-			goToXY(38, 7);
-			cout << "	By progressing through the different levels and worlds you will experience";
-			goToXY(38, 8);
-			cout << "more and more challenging words. At one point you will face walls, which ";
-			goToXY(38, 9);
-			cout << "will prevent you from moving and letter traps that will change the position";
-			goToXY(38, 10);
-			cout << "of anything that steps on them.";
+
+			for (int i = 7; i <= 10; i++)
+			{
+				goToXY(forwardIndent, i);
+				cout << sentences[i - 7];
+			}
 			goToXY(65, 12);
 			cout << "<Page 3/4>";
 			break;
@@ -428,7 +434,7 @@ void printHowToPlay()
 
 	char input = _getch();
 
-	if (input == 'A' || input == 'a')
+	if (input == 'A' || input == 'a' || input == ARROW_LEFT)
 	{
 		if (page != 0)
 		{
@@ -436,7 +442,7 @@ void printHowToPlay()
 		}
 	}
 
-	if (input == 'D' || input == 'd')
+	if (input == 'D' || input == 'd' || input == ARROW_RIGHT)
 	{
 		if (page != 3)
 		{
@@ -457,13 +463,21 @@ void printAboutUs()
 
 }
 
-void printExit()
+void Exit()
 {
-
+	system("cls");
+	cout << "Thanks for playing :)";
+	for (int i = 0; i < 2; i++)
+	{
+		cout << endl;
+	}
+	exit(0);
 }
 
 void printMenu(int activeOption)
 {
+	int menuCounter = 0;
+
 	setTextColor(COLOR_MAIN);
 
 	system("cls");
@@ -559,7 +573,7 @@ void printMenu(int activeOption)
 				printAboutUs();
 				break;
 			case 3:
-				exit(0);
+				Exit();
 				break;
 		}
 	}
