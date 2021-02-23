@@ -17,8 +17,6 @@
 #define COLOR_HIGHLIGHT 8
 #define PLAYER_CHARACTER 234
 
-int page = 0;
-
 using namespace std;
 
 const string mainMenuItems[4] = {
@@ -377,7 +375,7 @@ void resetHowToPlay()
 	cout << "	                                                                                    ";
 }
 
-void printHowToPlay()
+void printHowToPlay(int page)
 {
 	int forwardIndent = 38;
 
@@ -455,7 +453,7 @@ void printHowToPlay()
 		printMenu(1);
 	}
 
-	printHowToPlay();
+	printHowToPlay(page);
 }
 
 void printAboutUs()
@@ -567,7 +565,7 @@ void printMenu(int activeOption)
 				printLevelSelect(1);
 				break;
 			case 1:
-				printHowToPlay();
+				printHowToPlay(0);
 				break;
 			case 2:
 				printAboutUs();
