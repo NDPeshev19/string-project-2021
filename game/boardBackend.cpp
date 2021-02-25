@@ -77,6 +77,8 @@ COORD findCOORD(char letter)
 			}
 		}
 	}
+
+	return { 0, 0 };
 }
 
 string getWord(LEVEL_CODES word)
@@ -98,6 +100,7 @@ string getWord(LEVEL_CODES word)
 	default:
 		break;
 	}
+	return "";
 }
 
 COORD getRandomCOORD()
@@ -149,7 +152,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 
 	fillCOORD(letters, 0);
 
-	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, PLAYER_CHARACTER);
+	assignValue(PLAYER_STARTING_POS_X, PLAYER_STARTING_POS_Y, static_cast<char>(PLAYER_CHARACTER));
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -182,11 +185,11 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 			{
 				if (world == WORLD_CODES::worldTwo)
 				{
-					assignValue(temp.X, temp.Y, WALL_CHARACTER);
+					assignValue(temp.X, temp.Y, static_cast<char>(WALL_CHARACTER));
 				}
 				else
 				{
-					assignValue(temp.X, temp.Y, LETTER_TRAP_CHARACTER);
+					assignValue(temp.X, temp.Y, static_cast<char>(LETTER_TRAP_CHARACTER));
 				}
 			}
 			else
@@ -210,19 +213,19 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			switch (direction)
 			{
 			case MOVES::up:
-				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				swapValues(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
 				playerCoords.Y--;
 				break;
 			case MOVES::down:
-				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				swapValues(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
 				playerCoords.Y++;
 				break;
 			case MOVES::left:
-				swapCOORD(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				swapValues(playerCoords, { playerCoords.X - 1, playerCoords.Y });
 				playerCoords.X--;
 				break;
 			case MOVES::right:
-				swapCOORD(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				swapValues(playerCoords, { playerCoords.X + 1, playerCoords.Y });
 				playerCoords.X++;
 				break;
 			default:
@@ -234,23 +237,23 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			switch (direction)
 			{
 			case MOVES::up:
-				swapCOORD({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
-				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				swapValues({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
+				swapValues(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
 				playerCoords.Y--;
 				break;
 			case MOVES::down:
-				swapCOORD({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
-				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				swapValues({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
+				swapValues(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
 				playerCoords.Y++;
 				break;
 			case MOVES::left:
-				swapCOORD({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
-				swapCOORD(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				swapValues({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
+				swapValues(playerCoords, { playerCoords.X - 1, playerCoords.Y });
 				playerCoords.X--;
 				break;
 			case MOVES::right:
-				swapCOORD({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
-				swapCOORD(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				swapValues({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
+				swapValues(playerCoords, { playerCoords.X + 1, playerCoords.Y });
 				playerCoords.X++;
 				break;
 			default:
@@ -276,7 +279,7 @@ bool isAvailable(char value)
 	return value == ' ';
 }
 
-void swapCOORD(COORD first, COORD second)
+void swapValues(COORD first, COORD second)
 {
 	COORD tempCoord = second;
 	char tempChar = getValue(second.X, second.Y);
@@ -402,8 +405,10 @@ bool playerOnEdge(MOVES direction)
 
 		return false;
 	default:
-		break;
+		return false;
 	}
+
+	return false;
 }
 
 bool moveAvailable(MOVES direction)
@@ -605,7 +610,7 @@ bool moveAvailable(MOVES direction)
 
 bool winCheck(LEVEL_CODES level)
 {
-	int length = currentWord.length();
+	int length = static_cast<int>(currentWord.length());
 
 	COORD firstLetterPos = findCOORD(currentWord[0]);
 
@@ -636,4 +641,6 @@ bool winCheck(LEVEL_CODES level)
 	{
 		return false;
 	}
+	
+	return false;
 }
