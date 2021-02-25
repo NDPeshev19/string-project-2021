@@ -206,7 +206,7 @@ void generateBoard(WORLD_CODES world, LEVEL_CODES level)
 
 void makeMove(WORLD_CODES world, MOVES direction)
 {
-	if (moveAvailable(direction))
+	if (isMoveAvailable(direction))
 	{
 		if (isPlayerOnEdge(direction))
 		{
@@ -431,198 +431,211 @@ bool isPlayerOnEdge(MOVES direction)
 	return false;
 }
 
-bool moveAvailable(MOVES direction)
+bool isMoveAvailableUp()
+{
+	if (playerCoords.Y != 0)
+	{
+		if (getValue(playerCoords.X, playerCoords.Y - 1) == static_cast<char>(WALL_CHARACTER))
+		{
+			return false;
+		}
+	}
+
+	if (playerCoords.Y > 1)
+	{
+		if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+		{
+			if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+	}
+
+	if (playerCoords.Y == 0)
+	{
+		return false;
+	}
+
+	if (playerCoords.Y == 1 && isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+	{
+		return false;
+	}
+
+	if (playerCoords.Y == 1 && !isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+	{
+		return true;
+	}
+
+	if (playerCoords.Y > 1)
+	{
+		if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
+		{
+			return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
+		}
+
+	}
+
+	return true;
+}
+
+bool isMoveAvailableDown()
+{
+	if (playerCoords.Y != 9)
+	{
+		if (getValue(playerCoords.X, playerCoords.Y + 1) == static_cast<char>(WALL_CHARACTER))
+		{
+			return false;
+		}
+	}
+
+	if (playerCoords.Y < 8)
+	{
+		if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+		{
+			if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+	}
+
+	if (playerCoords.Y == 9)
+	{
+		return false;
+	}
+
+	if (playerCoords.Y == 8 && isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+	{
+		return false;
+	}
+
+	if (playerCoords.Y == 8 && !isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+	{
+		return true;
+	}
+
+	if (playerCoords.Y < 8)
+	{
+		if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
+		{
+			return (!isLetter(getValue(playerCoords.X, playerCoords.Y + 2)));
+		}
+	}
+
+	return true;
+}
+
+bool isMoveAvailableLeft()
+{
+	if (playerCoords.X != 0)
+	{
+		if (getValue(playerCoords.X - 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+		{
+			return false;
+		}
+	}
+
+	if (playerCoords.X > 1)
+	{
+		if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+		{
+			if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+	}
+
+	if (playerCoords.X == 0)
+	{
+		return false;
+	}
+
+	if (playerCoords.X == 1 && isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+	{
+		return false;
+	}
+
+	if (playerCoords.X == 1 && !isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+	{
+		return true;
+	}
+
+	if (playerCoords.X > 1)
+	{
+		if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
+		{
+			return (!isLetter(getValue(playerCoords.X - 2, playerCoords.Y)));
+		}
+	}
+
+	return true;
+}
+
+bool isMoveAvailableRight()
+{
+	if (playerCoords.X != 9)
+	{
+		if (getValue(playerCoords.X + 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+		{
+			return false;
+		}
+	}
+
+	if (playerCoords.X < 8)
+	{
+		if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+		{
+			if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
+			{
+				return false;
+			}
+		}
+	}
+
+	if (playerCoords.X == 9)
+	{
+		return false;
+	}
+
+	if (playerCoords.X == 8 && isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+	{
+		return false;
+	}
+
+	if (playerCoords.X == 8 && !isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+	{
+		return true;
+	}
+
+	if (playerCoords.X < 8)
+	{
+		if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
+		{
+			return (!isLetter(getValue(playerCoords.X + 2, playerCoords.Y)));
+		}
+	}
+
+	return true;
+}
+
+bool isMoveAvailable(MOVES direction)
 {
 	switch (direction)
 	{
 	case MOVES::up:
-		if (playerCoords.Y != 0)
-		{
-			if (getValue(playerCoords.X, playerCoords.Y - 1) == static_cast<char>(WALL_CHARACTER))
-			{
-				return false;
-			}
-		}
-
-		if (playerCoords.Y > 1)
-		{
-			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-			{
-				if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(WALL_CHARACTER))
-				{
-					return false;
-				}
-			}
-		}
-
-		if (playerCoords.Y == 0)
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 1 && isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 1 && !isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-		{
-			return true;
-		}
-
-		if (playerCoords.Y > 1)
-		{
-			if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
-			{
-				return (!isLetter(getValue(playerCoords.X, playerCoords.Y - 2)));
-			}
-
-		}
-
-		return true;
-
-		break;
+		return isMoveAvailableUp();
 
 	case MOVES::down:
-		if (playerCoords.Y != 9)
-		{
-			if (getValue(playerCoords.X, playerCoords.Y + 1) == static_cast<char>(WALL_CHARACTER))
-			{
-				return false;
-			}
-		}
-
-		if (playerCoords.Y < 8)
-		{
-			if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-			{
-				if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(WALL_CHARACTER))
-				{
-					return false;
-				}
-			}
-		}
-
-		if (playerCoords.Y == 9)
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 8 && isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-		{
-			return false;
-		}
-
-		if (playerCoords.Y == 8 && !isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-		{
-			return true;
-		}
-
-		if (playerCoords.Y < 8)
-		{
-			if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
-			{
-				return (!isLetter(getValue(playerCoords.X, playerCoords.Y + 2)));
-			}
-		}
-
-		return true;
-
-		break;
+		return isMoveAvailableDown();
 
 	case MOVES::left:
-		if (playerCoords.X != 0)
-		{
-			if (getValue(playerCoords.X - 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
-			{
-				return false;
-			}
-		}
-
-		if (playerCoords.X > 1)
-		{
-			if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-			{
-				if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
-				{
-					return false;
-				}
-			}
-		}
-
-		if (playerCoords.X == 0)
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 1 && isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 1 && !isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-		{
-			return true;
-		}
-
-		if (playerCoords.X > 1)
-		{
-			if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
-			{
-				return (!isLetter(getValue(playerCoords.X - 2, playerCoords.Y)));
-			}
-		}
-
-		return true;
-
-		break;
+		return isMoveAvailableLeft();
 
 	case MOVES::right:
-		if (playerCoords.X != 9)
-		{
-			if (getValue(playerCoords.X + 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
-			{
-				return false;
-			}
-		}
+		return isMoveAvailableRight();
 
-		if (playerCoords.X < 8)
-		{
-			if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-			{
-				if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
-				{
-					return false;
-				}
-			}
-		}
-
-		if (playerCoords.X == 9)
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 8 && isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-		{
-			return false;
-		}
-
-		if (playerCoords.X == 8 && !isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-		{
-			return true;
-		}
-
-		if (playerCoords.X < 8)
-		{
-			if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
-			{
-				return (!isLetter(getValue(playerCoords.X + 2, playerCoords.Y)));
-			}
-		}
-
-		return true;
-
-		break;
 	default:
 		return false;
 	}
