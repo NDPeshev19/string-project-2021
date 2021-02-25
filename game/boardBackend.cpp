@@ -210,19 +210,19 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			switch (direction)
 			{
 			case MOVES::up:
-				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
 				playerCoords.Y--;
 				break;
 			case MOVES::down:
-				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
 				playerCoords.Y++;
 				break;
 			case MOVES::left:
-				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				swapCOORD(playerCoords, { playerCoords.X - 1, playerCoords.Y });
 				playerCoords.X--;
 				break;
 			case MOVES::right:
-				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				swapCOORD(playerCoords, { playerCoords.X + 1, playerCoords.Y });
 				playerCoords.X++;
 				break;
 			default:
@@ -234,23 +234,23 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			switch (direction)
 			{
 			case MOVES::up:
-				swap({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
-				swap(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				swapCOORD({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
+				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
 				playerCoords.Y--;
 				break;
 			case MOVES::down:
-				swap({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
-				swap(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				swapCOORD({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
+				swapCOORD(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
 				playerCoords.Y++;
 				break;
 			case MOVES::left:
-				swap({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
-				swap(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				swapCOORD({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
+				swapCOORD(playerCoords, { playerCoords.X - 1, playerCoords.Y });
 				playerCoords.X--;
 				break;
 			case MOVES::right:
-				swap({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
-				swap(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				swapCOORD({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
+				swapCOORD(playerCoords, { playerCoords.X + 1, playerCoords.Y });
 				playerCoords.X++;
 				break;
 			default:
@@ -276,7 +276,7 @@ bool isAvailable(char value)
 	return value == ' ';
 }
 
-void swap(COORD first, COORD second)
+void swapCOORD(COORD first, COORD second)
 {
 	COORD tempCoord = second;
 	char tempChar = getValue(second.X, second.Y);
