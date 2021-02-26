@@ -46,36 +46,39 @@ struct level_select_colors {
 
 char boardCharacters[11] = { char(218), char(191), char(192), char(217), char(194), char(193), char(195), char(180), char(197), char(196), char(179) };
 
-void checkHandle()
+HANDLE getOutputHandle()
 {
-	HANDLE getHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE H_OUTPUT = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	if (getHandle == INVALID_HANDLE_VALUE)
+	if (H_OUTPUT == INVALID_HANDLE_VALUE)
 	{
-		errorDisplay();
+		string error = "Failed getting STD_OUTPUT_HANDLE!";
+		displayError(error);
 	}
+
+	return H_OUTPUT;
 }
 
-void errorDisplay()
+void displayError(string error)
 {
 	system("cls");
-	cout << "We're sincerely sorry, but it seems that your game has crashed. Try restarting :)" << endl;
+	cerr << error;
 	exit(0);
 }
 
 void setTextColor(int color)
 {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-	checkHandle();
+	HANDLE STD_OUTPUT = getOutputHandle();
+	SetConsoleTextAttribute(STD_OUTPUT, color);
 }
 
 void goToXY(short x, short y)
 {
+	HANDLE STD_OUTPUT = getOutputHandle();
 	COORD cords;
 	cords.X = x;
 	cords.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cords);
-	checkHandle();
+	SetConsoleCursorPosition(STD_OUTPUT, cords);
 }
 
 void setAllMainMenuColors(int val)

@@ -19,8 +19,8 @@ enum class BOARD_CHARACTERS
 
 char boardCharacters[];
 
-void checkHandle();
-void errorDisplay();
+HANDLE getOutputHandle();
+void displayError(std::string error);
 void setTextColor(int color);
 void goToXY(short x, short y);
 void setAllMainMenuColors(int val);
