@@ -44,27 +44,13 @@ struct level_select_colors {
 /*CHARACTERS FOR CELLS*/
 
 
-char boardCharacters[11] = { 218, 191, 192, 217, 194, 193, 195, 180, 197, 196, 179 };
-
-/*
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::topToBottom)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomToTop)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::leftToRight)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::rightToLeft)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::cross)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)]
-*/
+char boardCharacters[11] = { char(218), char(191), char(192), char(217), char(194), char(193), char(195), char(180), char(197), char(196), char(179) };
 
 void checkHandle()
 {
-	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE getHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	if (output == INVALID_HANDLE_VALUE)
+	if (getHandle == INVALID_HANDLE_VALUE)
 	{
 		errorDisplay();
 	}
@@ -73,7 +59,7 @@ void checkHandle()
 void errorDisplay()
 {
 	system("cls");
-	cout << "We're sincerely sorry, but it seems that your game has crashed. Try restarting :)";
+	cout << "We're sincerely sorry, but it seems that your game has crashed. Try restarting :)" << endl;
 	exit(0);
 }
 
