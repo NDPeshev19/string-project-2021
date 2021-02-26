@@ -60,9 +60,27 @@ boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)]
 boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)]
 */
 
+void checkHandle()
+{
+	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	if (output == INVALID_HANDLE_VALUE)
+	{
+		errorDisplay();
+	}
+}
+
+void errorDisplay()
+{
+	system("cls");
+	cout << "We're sincerely sorry, but it seems that your game has crashed. Try restarting :)";
+	exit(0);
+}
+
 void setTextColor(int color)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+	checkHandle();
 }
 
 void goToXY(short x, short y)
@@ -71,6 +89,7 @@ void goToXY(short x, short y)
 	cords.X = x;
 	cords.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cords);
+	checkHandle();
 }
 
 void setAllMainMenuColors(int val)
