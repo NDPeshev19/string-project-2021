@@ -3,6 +3,7 @@
 #include "boardBackend.h"
 #include <iostream>
 #include <conio.h>
+#include <string>
 
 using namespace std;
 
@@ -28,6 +29,14 @@ void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySele
 {
 	currentWorld = currentlySelectedWorld;
 	currentLevel = currentlySelectedLevel;
+
+	string world = " World " + to_string(static_cast<int>(incrementWorld(currentlySelectedWorld)));
+	string level = " Level " + to_string(static_cast<int>(incrementLevel(currentlySelectedLevel)));
+	string title = world + level;
+
+	title = "title " + title;
+
+	system(title.c_str());
 
 	generateBoard(currentlySelectedWorld, currentlySelectedLevel);
 
