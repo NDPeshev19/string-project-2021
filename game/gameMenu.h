@@ -2,6 +2,15 @@
 
 #include "boardBackend.h"
 
+#define ESCAPE_BUTTON 27
+#define ARROW_LEFT 75
+#define ARROW_RIGHT 77
+#define ARROW_UP 72
+#define ARROW_DOWN 80
+#define COLOR_MAIN 15
+#define PLAYER_CHARACTER 234
+#define KEY_ENTER 13
+
 enum class BOARD_CHARACTERS
 {
 	topLeftCorner,

@@ -9,14 +9,6 @@ using namespace std;
 
 #define BOARD_SIZE 10
 #define RESET_BUTTON 114
-#define ESCAPE_BUTTON 27
-#define ENTER_KEY 13
-#define ARROW_LEFT 75
-#define ARROW_RIGHT 77
-#define ARROW_UP 72
-#define ARROW_DOWN 80
-#define PLAYER_CHARACTER 234
-#define COLOR_MAIN 15
 #define WALL_CHARACTER 178
 
 LEVEL_CODES currentLevel;
@@ -30,18 +22,21 @@ void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySele
 	currentWorld = currentlySelectedWorld;
 	currentLevel = currentlySelectedLevel;
 
+	// Asigns the current world and level numbers to a string
 	string world = " World " + to_string(static_cast<int>(incrementWorld(currentlySelectedWorld)));
 	string level = " Level " + to_string(static_cast<int>(incrementLevel(currentlySelectedLevel)));
 	string title = world + level;
 
 	title = "title " + title;
 
+	// Sets the string to a title
 	system(title.c_str());
 
 	generateBoard(currentlySelectedWorld, currentlySelectedLevel);
 
 }
 
+// Prints the first row of the board
 void printFirstRow()
 {
 	setTextColor(15);
@@ -109,6 +104,7 @@ void printBottomRow()
 	cout << endl;
 }
 
+// Prints the last row of the board
 void printLastRow()
 {
 	int bottomToTop = 0;
@@ -235,7 +231,7 @@ void getUserInput()
 
 	else if (winCheck(currentLevel))
 	{
-		if (userInput == ENTER_KEY)
+		if (userInput == KEY_ENTER)
 		{
 			printWinMenu(0, currentLevel, currentWorld);
 		}

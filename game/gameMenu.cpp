@@ -7,15 +7,7 @@
 #include <windows.h>
 #include <cstdlib>
 
-#define ESCAPE_BUTTON 27
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_ENTER 13
-#define ARROW_LEFT 75
-#define ARROW_RIGHT 77
-#define COLOR_MAIN 15
 #define COLOR_SELECT 8
-#define PLAYER_CHARACTER 234
 
 using namespace std;
 
@@ -57,6 +49,7 @@ HANDLE getOutputHandle()
 	return H_OUTPUT;
 }
 
+// Displays the given string as an error message
 void displayError(string error)
 {
 	system("cls");
@@ -70,6 +63,7 @@ void setTextColor(int color)
 	SetConsoleTextAttribute(STD_OUTPUT, color);
 }
 
+// Sets the cursor position and the given coordinates
 void goToXY(short x, short y)
 {
 	HANDLE STD_OUTPUT = getOutputHandle();
@@ -135,8 +129,10 @@ void printWorldOne(int currentlySelected)
 	cout << "         World 1" << endl;
 	cout << endl;
 
+	// Prints the first row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << endl;
 
+	// Prints the second row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
 	setTextColor(levelSelectColors.world1[0]);
 	cout << " 1 ";
@@ -153,6 +149,7 @@ void printWorldOne(int currentlySelected)
 	setTextColor(COLOR_MAIN);
 	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " > " << endl;
 
+	// Prints the last row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << endl;
 
 	char typedChar = _getch();
@@ -212,8 +209,10 @@ void printWorldTwo(int currentlySelected)
 	cout << "         World 2" << endl;
 	cout << endl;
 
+	// Prints the first row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << endl;
 
+	// Prints the second row
 	cout << " < " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
 	setTextColor(levelSelectColors.world2[0]);
 	cout << " 1 ";
@@ -230,6 +229,7 @@ void printWorldTwo(int currentlySelected)
 	setTextColor(COLOR_MAIN);
 	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << " > " << endl;
 
+	// Prints the last row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << endl;
 
 	char typedChar = _getch();
@@ -294,8 +294,10 @@ void printWorldThree(int currentlySelected)
 	cout << "         World 3" << endl;
 	cout << endl;
 
+	// Prints the first row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)] << endl;
 
+	// Prints the second row
 	cout << " < " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)];
 	setTextColor(levelSelectColors.world3[0]);
 	cout << " 1 ";
@@ -312,6 +314,7 @@ void printWorldThree(int currentlySelected)
 	setTextColor(COLOR_MAIN);
 	cout << boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)] << endl;
 
+	// Prints the last row
 	cout << "   " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << "  " << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)] << boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)] << endl;
 
 	char typedChar = _getch();
@@ -481,7 +484,26 @@ void printHowToPlay(int page)
 }
 
 void printAboutUs()
-{
+{	
+	system("title About us");
+
+	goToXY(37, 10);
+	cout << "We're a team of 4 students, making a simple, but interesting word solving game.";
+	goToXY(32, 11);
+	cout << "If you want to learn more about our project, please reffer to our github page at :";
+	goToXY(32, 12);
+	cout<< "https://github.com/NDPeshev19/string-project-2021";
+
+	char userInput = _getch();
+
+	if (userInput == ESCAPE_BUTTON)
+	{
+		printMenu(2);
+	}
+	else
+	{
+		printAboutUs();
+	}
 
 }
 
@@ -565,7 +587,7 @@ void printMenu(int activeOption)
 
 	char latestKeyPress = _getch();
 
-	if (latestKeyPress == 's' || latestKeyPress == 'S' || latestKeyPress == KEY_DOWN)
+	if (latestKeyPress == 's' || latestKeyPress == 'S' || latestKeyPress == ARROW_DOWN)
 	{
 		activeOption = (activeOption < 3) ? activeOption + 1 : 0;
 
@@ -574,7 +596,7 @@ void printMenu(int activeOption)
 		printMenu(activeOption);
 	}
 
-	if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == KEY_UP)
+	if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == ARROW_UP)
 	{
 		activeOption = (activeOption > 0) ? activeOption - 1 : 3;
 
@@ -631,8 +653,11 @@ void gameEnd()
 
 WORLD_CODES incrementWorld(WORLD_CODES world)
 {
+	// Creates a temporary variable to store the casted to int WORLD_CODES variable
 	int temp = static_cast<int>(world);
 	temp++;
+
+	// Casts the incremented varialble back to WORLD_CODES
 	world = static_cast<WORLD_CODES>(temp);
 
 	return world;
@@ -640,8 +665,11 @@ WORLD_CODES incrementWorld(WORLD_CODES world)
 
 LEVEL_CODES incrementLevel(LEVEL_CODES level)
 {
+	// Creates a temporary variable to store the casted to int WORLD_CODES variable
 	int temp = static_cast<int>(level);
 	temp++;
+
+	// Casts the incremented varialble back to WORLD_CODES
 	level = static_cast<LEVEL_CODES>(temp);
 
 	return level;
@@ -674,7 +702,7 @@ void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES curre
 
 	char latestKeyPress = _getch();
 
-	if (latestKeyPress == 's' || latestKeyPress == 'S' || latestKeyPress == KEY_DOWN)
+	if (latestKeyPress == 's' || latestKeyPress == 'S' || latestKeyPress == ARROW_DOWN)
 	{
 
 		if (activeOption == 1)
@@ -690,7 +718,7 @@ void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES curre
 		printWinMenu(activeOption, previousLevel, currentWorld);
 	}
 
-	if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == KEY_UP)
+	if (latestKeyPress == 'w' || latestKeyPress == 'W' || latestKeyPress == ARROW_UP)
 	{
 		if (activeOption == 0)
 		{
@@ -716,6 +744,7 @@ void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES curre
 		case 0:
 			previousLevel = incrementLevel(previousLevel);
 
+			//Switches to the next world if the played level was level 3
 			if (static_cast<int>(previousLevel) == 3)
 			{
 				currentWorld = incrementWorld(currentWorld);
