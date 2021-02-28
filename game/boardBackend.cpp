@@ -213,19 +213,19 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			switch (direction)
 			{
 			case MOVES::up:
-				swapValues(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				swapValues(playerCoords, { playerCoords.X, static_cast<short>(playerCoords.Y - 1) });
 				playerCoords.Y--;
 				break;
 			case MOVES::down:
-				swapValues(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				swapValues(playerCoords, { playerCoords.X, static_cast<short>(playerCoords.Y + 1) });
 				playerCoords.Y++;
 				break;
 			case MOVES::left:
-				swapValues(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				swapValues(playerCoords, { static_cast<short>(playerCoords.X - 1), playerCoords.Y });
 				playerCoords.X--;
 				break;
 			case MOVES::right:
-				swapValues(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				swapValues(playerCoords, { static_cast<short>(playerCoords.X + 1), playerCoords.Y });
 				playerCoords.X++;
 				break;
 			default:
@@ -237,23 +237,23 @@ void makeMove(WORLD_CODES world, MOVES direction)
 			switch (direction)
 			{
 			case MOVES::up:
-				swapValues({ playerCoords.X, playerCoords.Y - 1 }, { playerCoords.X, playerCoords.Y - 2 });
-				swapValues(playerCoords, { playerCoords.X, playerCoords.Y - 1 });
+				swapValues({ playerCoords.X, static_cast<short>(playerCoords.Y - 1) }, { playerCoords.X, static_cast<short>(playerCoords.Y - 2) });
+				swapValues(playerCoords, { playerCoords.X, static_cast<short>(playerCoords.Y - 1) });
 				playerCoords.Y--;
 				break;
 			case MOVES::down:
-				swapValues({ playerCoords.X, playerCoords.Y + 1 }, { playerCoords.X, playerCoords.Y + 2 });
-				swapValues(playerCoords, { playerCoords.X, playerCoords.Y + 1 });
+				swapValues({ playerCoords.X, static_cast<short>(playerCoords.Y + 1) }, { playerCoords.X, static_cast<short>(playerCoords.Y + 2) });
+				swapValues(playerCoords, { playerCoords.X, static_cast<short>(playerCoords.Y + 1) });
 				playerCoords.Y++;
 				break;
 			case MOVES::left:
-				swapValues({ playerCoords.X - 1, playerCoords.Y }, { playerCoords.X - 2, playerCoords.Y });
-				swapValues(playerCoords, { playerCoords.X - 1, playerCoords.Y });
+				swapValues({ static_cast<short>(playerCoords.X - 1), playerCoords.Y }, { static_cast<short>(playerCoords.X - 2), playerCoords.Y });
+				swapValues(playerCoords, { static_cast<short>(playerCoords.X - 1), playerCoords.Y });
 				playerCoords.X--;
 				break;
 			case MOVES::right:
-				swapValues({ playerCoords.X + 1, playerCoords.Y }, { playerCoords.X + 2, playerCoords.Y });
-				swapValues(playerCoords, { playerCoords.X + 1, playerCoords.Y });
+				swapValues({ static_cast<short>(playerCoords.X + 1), playerCoords.Y }, { static_cast<short>(playerCoords.X + 2), playerCoords.Y });
+				swapValues(playerCoords, { static_cast<short>(playerCoords.X + 1), playerCoords.Y });
 				playerCoords.X++;
 				break;
 			default:
@@ -271,7 +271,7 @@ bool isLetter(char letter)
 
 bool isWall(char value)
 {
-	return value == WALL_CHARACTER;
+	return value == static_cast<char>(WALL_CHARACTER);
 }
 
 bool isAvailable(char value)
@@ -281,7 +281,6 @@ bool isAvailable(char value)
 
 void swapValues(COORD first, COORD second)
 {
-	COORD tempCoord = second;
 	char tempChar = getValue(second.X, second.Y);
 
 	assignValue(second.X, second.Y, getValue(first.X, first.Y));
@@ -472,7 +471,7 @@ bool isMoveAvailableUp()
 		{
 			if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(LETTER_TRAP_CHARACTER))
 			{
-				moveToRandomCOORD({ playerCoords.X, playerCoords.Y - 1 });
+				moveToRandomCOORD({ playerCoords.X, static_cast<short>(playerCoords.Y - 1) });
 				return true;
 			}
 
@@ -532,7 +531,7 @@ bool isMoveAvailableDown()
 		{
 			if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(LETTER_TRAP_CHARACTER))
 			{
-				moveToRandomCOORD({ playerCoords.X, playerCoords.Y + 1 });
+				moveToRandomCOORD({ playerCoords.X, static_cast<short>(playerCoords.Y + 1) });
 				return true;
 			}
 
@@ -591,7 +590,7 @@ bool isMoveAvailableLeft()
 		{
 			if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(LETTER_TRAP_CHARACTER))
 			{
-				moveToRandomCOORD({ playerCoords.X - 1, playerCoords.Y });
+				moveToRandomCOORD({ static_cast<short>(playerCoords.X - 1), playerCoords.Y });
 				return true;
 			}
 
@@ -648,7 +647,7 @@ bool isMoveAvailableRight()
 	{
 		if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(LETTER_TRAP_CHARACTER))
 		{
-			moveToRandomCOORD({ playerCoords.X + 1, playerCoords.Y });
+			moveToRandomCOORD({ static_cast<short>(playerCoords.X + 1), playerCoords.Y });
 			return true;
 		}
 
