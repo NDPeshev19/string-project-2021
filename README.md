@@ -1,2 +1,2 @@
-![Athena Logo](Design/AthenaLogoTrans.png)
+![Athena Logo](Design/LogoFull-colored.png)
 # string-project-2021
