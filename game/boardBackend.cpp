@@ -288,6 +288,25 @@ void swapValues(COORD first, COORD second)
 	assignValue(first.X, first.Y, tempChar);
 }
 
+void moveToRandomCOORD(COORD toMove)
+{
+	GRand random;
+	bool swapped = false;
+	while (!swapped)
+	{
+		COORD moveTo = { static_cast<short>(random.i(7) + 1), static_cast<short>(random.i(7) + 1) };
+		if (isAvailable(getValue(moveTo.X, moveTo.Y)))
+		{
+			if (getValue(toMove.X, toMove.Y) == static_cast<char>(PLAYER_CHARACTER))
+			{
+				playerCoords = moveTo;
+			}
+			swapValues(toMove, moveTo);
+			swapped = true;
+		}
+	}
+}
+
 bool isPlayerOnEdgeUp()
 {
 	if (playerCoords.Y != 0)
@@ -299,7 +318,7 @@ bool isPlayerOnEdgeUp()
 
 		if (playerCoords.Y > 1)
 		{
-			if (!isLetter(getValue(playerCoords.X, playerCoords.Y - 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y - 2)))
+			if (!isLetter(getValue(playerCoords.X, playerCoords.Y - 1)) && !isAvailable(getValue(playerCoords.X, playerCoords.Y - 2)))
 			{
 				return true;
 			}
@@ -330,7 +349,7 @@ bool isPlayerOnEdgeDown()
 
 		if (playerCoords.Y < 8)
 		{
-			if (!isLetter(getValue(playerCoords.X, playerCoords.Y + 1)) && isLetter(getValue(playerCoords.X, playerCoords.Y + 2)))
+			if (!isLetter(getValue(playerCoords.X, playerCoords.Y + 1)) && !isAvailable(getValue(playerCoords.X, playerCoords.Y + 2)))
 			{
 				return true;
 			}
@@ -361,7 +380,7 @@ bool isPlayerOnEdgeLeft()
 
 		if (playerCoords.X > 1)
 		{
-			if (!isLetter(getValue(playerCoords.X - 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X - 2, playerCoords.Y)))
+			if (!isLetter(getValue(playerCoords.X - 1, playerCoords.Y)) && !isAvailable(getValue(playerCoords.X - 2, playerCoords.Y)))
 			{
 				return true;
 			}
@@ -392,7 +411,7 @@ bool isPlayerOnEdgeRight()
 
 		if (playerCoords.X < 8)
 		{
-			if (!isLetter(getValue(playerCoords.X + 1, playerCoords.Y)) && isLetter(getValue(playerCoords.X + 2, playerCoords.Y)))
+			if (!isLetter(getValue(playerCoords.X + 1, playerCoords.Y)) && !isAvailable(getValue(playerCoords.X + 2, playerCoords.Y)))
 			{
 				return true;
 			}
@@ -435,6 +454,12 @@ bool isMoveAvailableUp()
 {
 	if (playerCoords.Y != 0)
 	{
+		if (getValue(playerCoords.X, playerCoords.Y - 1) == static_cast<char>(LETTER_TRAP_CHARACTER))
+		{
+			moveToRandomCOORD(playerCoords);
+			return false;
+		}
+
 		if (getValue(playerCoords.X, playerCoords.Y - 1) == static_cast<char>(WALL_CHARACTER))
 		{
 			return false;
@@ -445,6 +470,12 @@ bool isMoveAvailableUp()
 	{
 		if (isLetter(getValue(playerCoords.X, playerCoords.Y - 1)))
 		{
+			if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(LETTER_TRAP_CHARACTER))
+			{
+				moveToRandomCOORD({ playerCoords.X, playerCoords.Y - 1 });
+				return true;
+			}
+
 			if (getValue(playerCoords.X, playerCoords.Y - 2) == static_cast<char>(WALL_CHARACTER))
 			{
 				return false;
@@ -483,6 +514,12 @@ bool isMoveAvailableDown()
 {
 	if (playerCoords.Y != 9)
 	{
+		if (getValue(playerCoords.X, playerCoords.Y + 1) == static_cast<char>(LETTER_TRAP_CHARACTER))
+		{
+			moveToRandomCOORD(playerCoords);
+			return false;
+		}
+
 		if (getValue(playerCoords.X, playerCoords.Y + 1) == static_cast<char>(WALL_CHARACTER))
 		{
 			return false;
@@ -493,6 +530,12 @@ bool isMoveAvailableDown()
 	{
 		if (isLetter(getValue(playerCoords.X, playerCoords.Y + 1)))
 		{
+			if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(LETTER_TRAP_CHARACTER))
+			{
+				moveToRandomCOORD({ playerCoords.X, playerCoords.Y + 1 });
+				return true;
+			}
+
 			if (getValue(playerCoords.X, playerCoords.Y + 2) == static_cast<char>(WALL_CHARACTER))
 			{
 				return false;
@@ -530,6 +573,12 @@ bool isMoveAvailableLeft()
 {
 	if (playerCoords.X != 0)
 	{
+		if (getValue(playerCoords.X - 1, playerCoords.Y) == static_cast<char>(LETTER_TRAP_CHARACTER))
+		{
+			moveToRandomCOORD(playerCoords);
+			return false;
+		}
+
 		if (getValue(playerCoords.X - 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
 		{
 			return false;
@@ -540,6 +589,12 @@ bool isMoveAvailableLeft()
 	{
 		if (isLetter(getValue(playerCoords.X - 1, playerCoords.Y)))
 		{
+			if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(LETTER_TRAP_CHARACTER))
+			{
+				moveToRandomCOORD({ playerCoords.X - 1, playerCoords.Y });
+				return true;
+			}
+
 			if (getValue(playerCoords.X - 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
 			{
 				return false;
@@ -577,6 +632,12 @@ bool isMoveAvailableRight()
 {
 	if (playerCoords.X != 9)
 	{
+		if (getValue(playerCoords.X + 1, playerCoords.Y) == static_cast<char>(LETTER_TRAP_CHARACTER))
+		{
+			moveToRandomCOORD(playerCoords);
+			return false;
+		}
+
 		if (getValue(playerCoords.X + 1, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))
 		{
 			return false;
@@ -585,6 +646,12 @@ bool isMoveAvailableRight()
 
 	if (playerCoords.X < 8)
 	{
+		if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(LETTER_TRAP_CHARACTER))
+		{
+			moveToRandomCOORD({ playerCoords.X + 1, playerCoords.Y });
+			return true;
+		}
+
 		if (isLetter(getValue(playerCoords.X + 1, playerCoords.Y)))
 		{
 			if (getValue(playerCoords.X + 2, playerCoords.Y) == static_cast<char>(WALL_CHARACTER))

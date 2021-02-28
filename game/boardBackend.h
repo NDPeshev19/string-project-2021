@@ -45,6 +45,7 @@ bool isLetter(char letter);
 bool isWall(char value);
 bool isAvailable(char value);
 void swapValues(COORD first, COORD second);
+void moveToRandomCOORD(COORD toMove);
 bool isPlayerOnEdgeUp();
 bool isPlayerOnEdgeDown();
 bool isPlayerOnEdgeLeft();
