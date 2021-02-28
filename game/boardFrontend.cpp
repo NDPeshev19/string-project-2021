@@ -205,36 +205,36 @@ void getUserInput()
 		printBoard();
 	}
 
-	if (userInput == 'a' || userInput == ARROW_LEFT)
+	else if (userInput == 'a' || userInput == ARROW_LEFT)
 	{
 		makeMove(currentWorld, MOVES::left);
 		printBoard();
 	}
 
-	if (userInput == 'd' || userInput == ARROW_RIGHT)
+	else if (userInput == 'd' || userInput == ARROW_RIGHT)
 	{
 		makeMove(currentWorld, MOVES::right);
 		printBoard();
 	}
 
-	if (userInput == 's' || userInput == ARROW_DOWN)
+	else if (userInput == 's' || userInput == ARROW_DOWN)
 	{
 		makeMove(currentWorld, MOVES::down);
 		printBoard();
 	}
 
-	if (userInput == RESET_BUTTON)
+	else if (userInput == RESET_BUTTON)
 	{
 		resetBoard();
 		printBoard();
 	}
 
-	if (userInput == ESCAPE_BUTTON)
+	else if (userInput == ESCAPE_BUTTON)
 	{
 		printMenu(0);
 	}
 
-	if (winCheck(currentLevel))
+	else if (winCheck(currentLevel))
 	{
 		if (userInput == ENTER_KEY)
 		{
@@ -243,6 +243,6 @@ void getUserInput()
 	}
 
 	
-	getUserInput();
+	else getUserInput();
 }
 
