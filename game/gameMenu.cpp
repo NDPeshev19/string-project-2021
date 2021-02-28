@@ -601,6 +601,28 @@ void printMenu(int activeOption)
 
 }
 
+void gameEnd()
+{
+	setTextColor(COLOR_MAIN);
+
+	system("cls");
+
+	cout << "Thank you so much for sticking with us to the end and experiencing our adventure. Come back soon :)" << endl << endl;
+
+	cout << "Press ENTER to return to main menu: ";
+
+	char latestKeyPress = _getch();
+
+	if (latestKeyPress == KEY_ENTER)
+	{
+		printMenu(0);
+	}
+	else
+	{
+		gameEnd();
+	}
+}
+
 WORLD_CODES incrementWorld(WORLD_CODES world)
 {
 	int temp = static_cast<int>(world);
@@ -621,9 +643,15 @@ LEVEL_CODES incrementLevel(LEVEL_CODES level)
 
 void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES currentWorld)
 {
+
+	if (previousLevel == LEVEL_CODES::levelThree || currentWorld == WORLD_CODES::worldThree)
+	{
+		gameEnd();
+	}
+
 	system("cls");
 
-	setTextColor(7);
+	setTextColor(COLOR_MAIN);
 
 	cout << endl;
 
