@@ -41,9 +41,6 @@ struct level_select_colors {
 	int world3[3] = { COLOR_MAIN, COLOR_MAIN, COLOR_MAIN };
 } levelSelectColors;
 
-/*CHARACTERS FOR CELLS*/
-
-
 char boardCharacters[11] = { char(218), char(191), char(192), char(217), char(194), char(193), char(195), char(180), char(197), char(196), char(179) };
 
 HANDLE getOutputHandle()
@@ -112,7 +109,6 @@ void updateWinMenuColors(int num)
 	winMenuColors[num] = COLOR_SELECT;
 }
 
-
 void setAllWorldColors(int world[], int color)
 {
 	for (int i = 0; i < 3; i++)
@@ -161,14 +157,14 @@ void printWorldOne(int currentlySelected)
 
 	char typedChar = _getch();
 
-	if (typedChar == 'a' || typedChar == 'A')
+	if (typedChar == 'a' || typedChar == 'A' || typedChar == ARROW_LEFT)
 	{
 		currentlySelected = (currentlySelected > 0) ? currentlySelected - 1 : currentlySelected;
 
 		printWorldOne(currentlySelected);
 	}
 
-	else if (typedChar == 'd' || typedChar == 'D')
+	else if (typedChar == 'd' || typedChar == 'D' || typedChar == ARROW_RIGHT)
 	{
 		if (currentlySelected < 2)
 		{
@@ -193,6 +189,11 @@ void printWorldOne(int currentlySelected)
 
 		printBoard();
 
+	}
+
+	else if (typedChar == ESCAPE_BUTTON)
+	{
+		printMenu(0);
 	}
 
 	else printWorldOne(currentlySelected);
@@ -233,7 +234,7 @@ void printWorldTwo(int currentlySelected)
 
 	char typedChar = _getch();
 
-	if (typedChar == 'a' || typedChar == 'A')
+	if (typedChar == 'a' || typedChar == 'A' || typedChar == ARROW_LEFT)
 	{
 		if (currentlySelected > 0)
 		{
@@ -247,7 +248,7 @@ void printWorldTwo(int currentlySelected)
 		}
 	}
 
-	else if (typedChar == 'd' || typedChar == 'D')
+	else if (typedChar == 'd' || typedChar == 'D' || typedChar == ARROW_RIGHT)
 	{
 		if (currentlySelected < 2)
 		{
@@ -270,6 +271,11 @@ void printWorldTwo(int currentlySelected)
 
 		printBoard();
 
+	}
+
+	else if (typedChar == ESCAPE_BUTTON)
+	{
+		printMenu(0);
 	}
 
 	else printWorldTwo(currentlySelected);
@@ -310,7 +316,7 @@ void printWorldThree(int currentlySelected)
 
 	char typedChar = _getch();
 
-	if (typedChar == 'a' || typedChar == 'A')
+	if (typedChar == 'a' || typedChar == 'A' || typedChar == ARROW_LEFT)
 	{
 		if (currentlySelected > 0)
 		{
@@ -324,7 +330,7 @@ void printWorldThree(int currentlySelected)
 		}
 	}
 
-	else if (typedChar == 'd' || typedChar == 'D')
+	else if (typedChar == 'd' || typedChar == 'D' || typedChar == ARROW_RIGHT)
 	{
 		if (currentlySelected < 2)
 		{
@@ -349,6 +355,11 @@ void printWorldThree(int currentlySelected)
 
 		winLogic(static_cast<LEVEL_CODES>(currentlySelected));
 
+	}
+
+	else if (typedChar == ESCAPE_BUTTON)
+	{
+		printMenu(0);
 	}
 
 	else printWorldThree(currentlySelected);
@@ -677,7 +688,6 @@ void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES curre
 				previousLevel = LEVEL_CODES::levelOne;
 			}
 
-			//Add case if world is 3 and level is 3
 
 			startWorldGen(currentWorld, previousLevel);
 			printBoard();

@@ -24,22 +24,6 @@ WORLD_CODES currentWorld;
 bool firstRowPrinted = false;
 bool lastRowPrinted = false;
 
-/*
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::topLeftCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::topRightCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomLeftCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomRightCorner)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::topToBottom)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::bottomToTop)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::leftToRight)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::rightToLeft)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::cross)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::horizontalLine)]
-boardCharacters[static_cast<int>(BOARD_CHARACTERS::verticalLine)]
-*/
-
-
-
 void startWorldGen(WORLD_CODES currentlySelectedWorld, LEVEL_CODES currentlySelectedLevel)
 {
 	currentWorld = currentlySelectedWorld;
