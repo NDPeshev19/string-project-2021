@@ -140,6 +140,12 @@ void printLastRow()
 	{
 		cout << "Click ENTER to continue:";
 	}
+	else
+	{
+		cout << "                        ";
+		goToXY(0, 20);
+	}
+
 }
 
 void printBoard()
