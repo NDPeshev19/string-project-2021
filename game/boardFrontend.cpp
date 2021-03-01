@@ -235,8 +235,12 @@ void getUserInput()
 		{
 			printWinMenu(0, currentLevel, currentWorld);
 		}
+		else
+		{
+			getUserInput();
+		}
 	}
 
-	else getUserInput();
+	 else getUserInput();
 }
 
