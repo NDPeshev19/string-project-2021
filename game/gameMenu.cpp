@@ -678,7 +678,7 @@ LEVEL_CODES incrementLevel(LEVEL_CODES level)
 void printWinMenu(int activeOption, LEVEL_CODES previousLevel, WORLD_CODES currentWorld)
 {
 
-	if (previousLevel == LEVEL_CODES::levelThree || currentWorld == WORLD_CODES::worldThree)
+	if (previousLevel == LEVEL_CODES::levelThree && currentWorld == WORLD_CODES::worldThree)
 	{
 		gameEnd();
 	}

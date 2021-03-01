@@ -237,7 +237,6 @@ void getUserInput()
 		}
 	}
 
-	
 	else getUserInput();
 }
 
